@@ -8,6 +8,7 @@ public class CharacterMovement : MonoBehaviour
 {
     public float speedX = 1;
     public float speedY = 1;
+    public bool light_flash;
 
     Rigidbody2D rb2d;
     SpriteRenderer sprRender;
@@ -23,6 +24,7 @@ public class CharacterMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        light_flash = false;
         rb2d = GetComponent<Rigidbody2D>();
         sprRender = GetComponent<SpriteRenderer>();
     }
@@ -32,8 +34,13 @@ public class CharacterMovement : MonoBehaviour
     {
         UpdateDirection();
         Shoot();
+
         if (Input.GetKeyDown(KeyCode.E)){
             pressingHide = !pressingHide;
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            light_flash = !light_flash;
         }
     }
 

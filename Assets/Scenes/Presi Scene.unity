@@ -129,28 +129,16 @@ GameObject:
   m_Component:
   - component: {fileID: 616149329}
   - component: {fileID: 616149328}
-  - component: {fileID: 616149327}
+  - component: {fileID: 616149330}
+  - component: {fileID: 616149332}
+  - component: {fileID: 616149331}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Linterna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &616149327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616149326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b4718f5978c3948be047a3ff339cc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alpha: 1
-  target: {fileID: 1635825275}
 --- !u!212 &616149328
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -215,12 +203,66 @@ Transform:
   m_GameObject: {fileID: 616149326}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5048, y: -0.2646, z: 0}
+  m_LocalPosition: {x: -0.703, y: -0.31, z: 0}
   m_LocalScale: {x: 0.3927, y: 0.3059, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &616149330
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616149326}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &616149331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616149326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759fa1e9a5be2c441a1cf750e487a970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light_on: {fileID: 1635825278}
+--- !u!114 &616149332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616149326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b4718f5978c3948be047a3ff339cc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alpha: 1000
+  target: {fileID: 1635825275}
 --- !u!1 &881851767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedX: 200
   speedY: 200
+  light_flash: 0
   direction: 0
   currShootTime: 0
   shootCadenceTime: 2
@@ -1101,7 +1144,7 @@ Transform:
   m_GameObject: {fileID: 1635825275}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1217,7 +1260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5589519270994176487, guid: f18d6695efa00cf47a8360f3890114a3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5589519270994176487, guid: f18d6695efa00cf47a8360f3890114a3, type: 3}
       propertyPath: m_LocalRotation.w
