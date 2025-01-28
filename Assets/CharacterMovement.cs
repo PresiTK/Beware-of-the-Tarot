@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public enum Direction { NONE, UP, DOWN, LEFT, RIGHT };
+public enum Direction { NONE, UP, DOWN, LEFT, RIGHT , DIAGONAL_UP_RIGHT, DIAGONAL_UP_LEFT, DIAGONAL_DOWN_RIGHT, DIAGONAL_DOWN_LEFT };
 public class CharacterMovement : MonoBehaviour
 {
     public float speedX = 1;
@@ -58,6 +59,22 @@ public class CharacterMovement : MonoBehaviour
             case Direction.RIGHT:
                 hInput = 1;
                 break;
+            case Direction.DIAGONAL_UP_RIGHT:
+                vInput = 1;
+                hInput = 1;
+                break;
+            case Direction.DIAGONAL_UP_LEFT:
+                vInput = 1;
+                hInput = -1;
+                break;
+            case Direction.DIAGONAL_DOWN_RIGHT:
+                vInput = -1;
+                hInput = 1;
+                break;
+            case Direction.DIAGONAL_DOWN_LEFT:
+                vInput = -1;
+                hInput = -1;
+                break;
             default:
                 break;
         }
@@ -74,13 +91,40 @@ public class CharacterMovement : MonoBehaviour
 
         int horizontal = 0;
         int vertical = 0;
-        if (Input.GetKey(KeyCode.UpArrow)){     vertical += 1;}
-        if (Input.GetKey(KeyCode.DownArrow)){   vertical -= 1;}
-        
-        if (Input.GetKey(KeyCode.LeftArrow)){   horizontal -= 1;}
-        if (Input.GetKey(KeyCode.RightArrow)){  horizontal += 1;}
+        if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow)){     vertical += 1; horizontal += 1; }
+        else if(Input.GetKey(KeyCode.DownArrow)&& Input.GetKey(KeyCode.LeftArrow)) { vertical -= 1; horizontal -= 1;}
+        else if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow)) { vertical += 1; horizontal -= 1; }
+        else if( Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow)) {  vertical -= 1; horizontal += 1;}
+        else
+        {
+            if (Input.GetKey(KeyCode.DownArrow)) { vertical -= 1; }
+            if (Input.GetKey(KeyCode.UpArrow)) { vertical += 1; }
+            if (Input.GetKey(KeyCode.LeftArrow)) { horizontal -= 1; }
+            if (Input.GetKey(KeyCode.RightArrow)) { horizontal += 1; }
+        }
 
-        
+
+        if(vertical == horizontal)
+        {
+            if (vertical < 0)
+            {
+                direction = Direction.DIAGONAL_DOWN_LEFT;
+            }
+            if (horizontal > 0) {
+                direction = Direction.DIAGONAL_UP_RIGHT;
+            }
+        }
+        else if(vertical * (-1) == horizontal)
+        {
+            if (vertical<horizontal)
+            {
+                direction = Direction.DIAGONAL_DOWN_RIGHT;
+            }
+            if (vertical > horizontal)
+            {
+                direction = Direction.DIAGONAL_UP_LEFT;
+            }
+        }
         if (vertical > 0){
             direction = Direction.UP;
         }else if (vertical < 0){
