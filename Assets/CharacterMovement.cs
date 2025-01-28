@@ -9,16 +9,21 @@ public class CharacterMovement : MonoBehaviour
     public float speedY = 1;
 
     Rigidbody2D rb2d;
+    SpriteRenderer sprRender;
 
     public Direction direction = Direction.NONE;
 
     public float currShootTime = 0;
     public float shootCadenceTime = 2.0f;
+
+    private bool isHiding = false;
+    private bool pressingHide = false;
     
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        sprRender = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -26,6 +31,9 @@ public class CharacterMovement : MonoBehaviour
     {
         UpdateDirection();
         Shoot();
+        if (Input.GetKeyDown(KeyCode.E)){
+            pressingHide = !pressingHide;
+        }
     }
 
     private void FixedUpdate()
@@ -62,6 +70,8 @@ public class CharacterMovement : MonoBehaviour
     {
         //Separamos lógica de física
         direction = Direction.NONE;
+        if(isHiding) { return; }
+
         int horizontal = 0;
         int vertical = 0;
         if (Input.GetKey(KeyCode.UpArrow)){     vertical += 1;}
@@ -99,4 +109,46 @@ public class CharacterMovement : MonoBehaviour
             currShootTime = 0;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if (collision.gameObject.tag.Equals("Hiding"))
+        {
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Hiding"))
+        {
+            HideInPlace(false);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Hiding"))
+        {
+            HideInPlace(pressingHide);
+        }
+    }
+
+    private void HideInPlace(bool hide) {
+        isHiding = hide;
+        if(sprRender != null)
+        {
+            Color col = sprRender.color;
+            if(isHiding)
+            {
+                col.a = 0.5f;
+            }
+            else
+            {
+                col.a = 1f;
+            }
+            sprRender.color = col;
+        }
+    }
+
 }
