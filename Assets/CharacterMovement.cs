@@ -174,9 +174,9 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if (collision.gameObject.tag.Equals("Hiding"))
+        if (collision.gameObject.tag.Equals("Hiding")&& pressingHide)
         {
+            pressingHide = false;
         }
     }
 
@@ -194,6 +194,7 @@ public class CharacterMovement : MonoBehaviour
         {
             HideInPlace(pressingHide);
         }
+
     }
 
     private void HideInPlace(bool hide) {
