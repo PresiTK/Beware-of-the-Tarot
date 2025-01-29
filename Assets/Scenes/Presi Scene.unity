@@ -180,6 +180,10 @@ PrefabInstance:
       propertyPath: otherDoor
       value: 
       objectReference: {fileID: 334652581}
+    - target: {fileID: 2910147696995922566, guid: a98c4a76f8f0d7c4599b3ad389880bf2, type: 3}
+      propertyPath: doorOffset.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8280655414858788072, guid: a98c4a76f8f0d7c4599b3ad389880bf2, type: 3}
       propertyPath: m_Color.b
       value: 0.02849722
@@ -210,6 +214,7 @@ GameObject:
   - component: {fileID: 616149330}
   - component: {fileID: 616149332}
   - component: {fileID: 616149331}
+  - component: {fileID: 616149333}
   m_Layer: 0
   m_Name: Linterna
   m_TagString: Untagged
@@ -341,6 +346,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alpha: 1000
   target: {fileID: 1635825275}
+--- !u!114 &616149333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616149326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: effc601afb645344e84a9f4f76d4ef1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 0}
 --- !u!1 &881851767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,6 +1078,7 @@ GameObject:
   - component: {fileID: 1635825278}
   - component: {fileID: 1635825277}
   - component: {fileID: 1635825276}
+  - component: {fileID: 1635825281}
   m_Layer: 0
   m_Name: Main Character
   m_TagString: Untagged
@@ -1228,6 +1247,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1635825281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635825275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: effc601afb645344e84a9f4f76d4ef1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 0}
 --- !u!1 &1669781084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,6 +1413,10 @@ PrefabInstance:
       propertyPath: otherDoor
       value: 
       objectReference: {fileID: 1791530811}
+    - target: {fileID: 2910147696995922566, guid: a98c4a76f8f0d7c4599b3ad389880bf2, type: 3}
+      propertyPath: doorOffset.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8280655414858788072, guid: a98c4a76f8f0d7c4599b3ad389880bf2, type: 3}
       propertyPath: m_Color.b
       value: 0.02849722
