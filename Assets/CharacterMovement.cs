@@ -86,7 +86,6 @@ public class CharacterMovement : MonoBehaviour
                 break;
         }
 
-        //Recordad multiplicar por deltaTime para que sea frame-dependent
         rb2d.linearVelocity = new Vector2(hInput * speedX * Time.fixedDeltaTime, vInput * speedY * Time.fixedDeltaTime);
     }
 
