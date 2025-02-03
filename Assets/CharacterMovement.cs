@@ -86,7 +86,7 @@ public class CharacterMovement : MonoBehaviour
                 break;
         }
 
-        rb2d.linearVelocity = new Vector2(hInput * speedX * Time.fixedDeltaTime, vInput * speedY * Time.fixedDeltaTime);
+        rb2d.velocity = new Vector2(hInput * speedX * Time.fixedDeltaTime, vInput * speedY * Time.fixedDeltaTime);
     }
 
     private void UpdateDirection()
