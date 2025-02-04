@@ -177,6 +177,10 @@ public class CharacterMovement : MonoBehaviour
         {
             pressingHide = false;
         }
+        if (collision.gameObject.tag.Equals("Enemy"))
+        {
+            Debug.Log("Te mueres");
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

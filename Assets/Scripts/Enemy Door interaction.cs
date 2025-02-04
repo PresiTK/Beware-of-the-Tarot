@@ -47,8 +47,14 @@ public class EnemyDoorInteraction : MonoBehaviour
             door = null;
         }
     }
-
-    private void Teleport()
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Door"))
+        { 
+             wait=!wait;
+        }
+    }
+        private void Teleport()
     {
         if (door != null)
         {
