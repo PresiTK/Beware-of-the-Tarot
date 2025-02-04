@@ -22,6 +22,11 @@ public class Hiding : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        hide = false;
+    }
+
     public Vector2 TeleportPlayer()
     {
         if (player != null) 
