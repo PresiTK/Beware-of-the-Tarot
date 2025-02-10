@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     public GameObject player;
     public int speed = 3;
     public EnemyDetection detection;
+    public GameOverScreen gameOverScreen;
     void Start()
     {
        
@@ -32,6 +33,8 @@ public class EnemyMovement : MonoBehaviour
         if (collision.gameObject.tag.Equals("Player"))
         {
             Destroy(collision.gameObject);
+            gameOverScreen.GameOverMenu();
+
         }
     }
 }
