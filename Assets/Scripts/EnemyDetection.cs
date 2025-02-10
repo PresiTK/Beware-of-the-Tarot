@@ -24,4 +24,12 @@ public class EnemyDetection : MonoBehaviour
             vision = true;
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            vision = false;
+        }
+    }
 }

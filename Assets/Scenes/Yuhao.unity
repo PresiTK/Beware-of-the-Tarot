@@ -440,8 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6814b008201728b4cb4218a39be9d6e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vision: {fileID: 578250494}
-  visto: 0
+  vision: 0
 --- !u!1 &1043363786
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,7 +517,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a36a4f69e43594b97f10cbdc461090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 578250494}
   speed: 3
+  detection: {fileID: 666132504}
 --- !u!212 &1043363789
 SpriteRenderer:
   m_ObjectHideFlags: 0
