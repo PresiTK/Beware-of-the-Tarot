@@ -5,17 +5,25 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private Transform player;
-    private EnemyDetection detection;
+    public GameObject player;
     public int speed = 3;
+    public EnemyDetection detection;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        MovementTowardsPlayer();
+    }
+
+    void MovementTowardsPlayer()
+    {
+        if (detection.vision == true)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        }
     }
 }

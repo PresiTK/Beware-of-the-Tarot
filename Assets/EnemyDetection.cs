@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class EnemyDetection : MonoBehaviour
 {
-    public GameObject vision;
-    public bool visto = false;
+    public bool vision = false;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            visto = true;
+            vision = true;
         }
     }
 }
