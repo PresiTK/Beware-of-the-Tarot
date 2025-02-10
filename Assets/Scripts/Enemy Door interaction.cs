@@ -24,7 +24,7 @@ public class EnemyDoorInteraction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        wait = !wait;
+        wait = true;
         if (wait)
         {
             if (collision.gameObject.tag.Equals("Door"))
@@ -45,13 +45,14 @@ public class EnemyDoorInteraction : MonoBehaviour
         if (collision.gameObject.tag.Equals("Door"))
         {
             door = null;
+            wait = false;
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag.Equals("Door"))
         { 
-             wait=!wait;
+
         }
     }
         private void Teleport()

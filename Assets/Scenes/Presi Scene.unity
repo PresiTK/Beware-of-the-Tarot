@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherDoor: {fileID: 2076019592}
-  doorOffset: {x: 0, y: 0}
+  doorOffset: {x: 1, y: 0}
 --- !u!61 &188892776
 BoxCollider2D:
   m_ObjectHideFlags: 0
