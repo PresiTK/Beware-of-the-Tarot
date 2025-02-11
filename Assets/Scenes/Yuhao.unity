@@ -353,11 +353,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ae2836fa04e664ab5e816448ae47cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSpeedX: 0
+  currentSpeedY: 0
   speedX: 200
   speedY: 200
+  runningSpeedX: 2
+  runningSpeedY: 2
   direction: 0
-  currShootTime: 0
-  shootCadenceTime: 2
 --- !u!212 &578250498
 SpriteRenderer:
   m_ObjectHideFlags: 0
