@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyDetection : MonoBehaviour
 {
     public bool vision = false;
+    public GameObject player;
+    public float detectionRange = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +16,10 @@ public class EnemyDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Vector2.Distance(transform.position, player.transform.position) >= detectionRange)
+        {
+            vision = false;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -22,14 +27,6 @@ public class EnemyDetection : MonoBehaviour
         if (collision.gameObject.tag.Equals("Player"))
         {
             vision = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Player"))
-        {
-            vision = false;
         }
     }
 }
