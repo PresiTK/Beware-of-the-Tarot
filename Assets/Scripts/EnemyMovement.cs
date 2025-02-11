@@ -10,10 +10,9 @@ public class EnemyMovement : MonoBehaviour
     public int speed = 20;
     public EnemyDetection detection;
     public GameOverScreen gameOverScreen;
-    Rigidbody2D rb;
     void Start()
     {
-       rb = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
@@ -26,8 +25,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (detection.vision)
         {
-            Vector3 direction = (player.transform.position - transform.position).normalized;
-            rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
     }
 
