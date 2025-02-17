@@ -15,11 +15,11 @@ public class EnemyDoorInteraction : MonoBehaviour
     Rigidbody2D rb2d;
     private void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+
     }
     private void Update()
     {
-        rb2d.velocity = new Vector2(100 * speedX * Time.fixedDeltaTime, 0);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
