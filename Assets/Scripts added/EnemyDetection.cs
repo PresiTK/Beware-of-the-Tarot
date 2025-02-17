@@ -16,9 +16,12 @@ public class EnemyDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) >= detectionRange)
+        if (player != null)
         {
-            vision = false;
+            if (Vector2.Distance(transform.position, player.transform.position) >= detectionRange)
+            {
+                vision = false;
+            }
         }
     }
 
