@@ -17,6 +17,6 @@ public class GameOverScreen : MonoBehaviour
     }
     public void Restart()
     {
-        SceneManager.LoadScene("Yuhao");
+        SceneManager.LoadScene("Eloi Scene");
     }
 }
