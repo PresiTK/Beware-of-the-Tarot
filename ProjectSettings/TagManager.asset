@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Hiding
+<<<<<<< HEAD
+=======
+  - Door
+  - Enemy
+  - Patrol
+  - puntos
+  - win
+>>>>>>> prueba-
   layers:
   - Default
   - TransparentFX
