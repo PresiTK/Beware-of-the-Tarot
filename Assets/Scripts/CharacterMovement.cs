@@ -197,7 +197,10 @@ public class CharacterMovement : MonoBehaviour
         {
             HideInPlace(pressingHide);
         }
-
+        if (collision.gameObject.tag.Equals("win"))
+        {
+            HideInPlace(pressingHide);
+        }
     }
 
     private void HideInPlace(bool hide) {

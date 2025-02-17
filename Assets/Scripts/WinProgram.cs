@@ -28,7 +28,7 @@ public class WinProgram : MonoBehaviour
         }
         if (wining && Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("Presi Scene");
+            SceneManager.LoadScene("Eloi Scene");
             menu = false;
         }
     }
