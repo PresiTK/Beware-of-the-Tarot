@@ -5,13 +5,14 @@ using UnityEngine;
 public class Win : MonoBehaviour
 {
     public GameObject player;
+    [SerializeField] private WinScreen screen;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("Si si la la");
-            Application.Quit();
+            Destroy(collision.gameObject);
+            screen.WinMenu();
         }
     }
 }
