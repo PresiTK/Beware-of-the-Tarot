@@ -25,7 +25,10 @@ public class EnemyMovement : MonoBehaviour
     {
         if (detection.vision)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            if (player != null) 
+            {
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            }
         }
     }
 
