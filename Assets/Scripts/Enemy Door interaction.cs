@@ -9,17 +9,18 @@ public class EnemyDoorInteraction : MonoBehaviour
     public float speedX = 1;
     public float speedY = 1;
     private bool wait = false;
+    public EnemyMovement tp;
 
     public GameObject door;
     private Vector2 teleportPosition = Vector2.zero;
     Rigidbody2D rb2d;
     private void Start()
     {
-
+        tp = FindObjectOfType<EnemyMovement>();
     }
     private void Update()
     {
-
+        transform.position = tp.transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -61,6 +62,7 @@ public class EnemyDoorInteraction : MonoBehaviour
         {
             transform.position = teleportPosition;
             door = null;
+            transform.parent.transform.position = teleportPosition;
         }
     }
 }

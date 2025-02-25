@@ -7,6 +7,7 @@ public class EnemyDetection : MonoBehaviour
     public bool vision = false;
     public GameObject player;
     public float detectionRange = 5f;
+    public Hiding hided;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +26,28 @@ public class EnemyDetection : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            vision = true;
+            if (!hided.notseen)
+            {
+                Debug.Log("ESTOY VIENDOTE");
+                vision = true;
+            }
+            if(hided.notseen)
+            {
+                vision = false;
+                Debug.Log("Por probar");
+            }
         }
     }
+    void OnTriggerExist2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            vision = false;
+        }
+    }
+
 }

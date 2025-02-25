@@ -11,6 +11,8 @@ public class EnemyMovement : MonoBehaviour
     public EnemyDetection detection;
     public GameOverScreen gameOverScreen;
     public CharacterMovement hide;
+    public EnemyDoorInteraction tp;
+
     void Start()
     {
         if(player != null)

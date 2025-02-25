@@ -3579,6 +3579,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedX: 1
   speedY: 1
+  position: {x: 0, y: 0, z: 0}
+  tp: {fileID: 655306131}
   door: {fileID: 0}
 --- !u!212 &442889869
 SpriteRenderer:
@@ -4796,6 +4798,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1569203951}
   m_SourcePrefab: {fileID: 100100000, guid: d4f7cf56faa5aa240aa314df084ce327, type: 3}
+--- !u!114 &655306131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4291738378478797511, guid: d4f7cf56faa5aa240aa314df084ce327, type: 3}
+  m_PrefabInstance: {fileID: 655306130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569203950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a36a4f69e43594b97f10cbdc461090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &667061449
 GameObject:
   m_ObjectHideFlags: 0
