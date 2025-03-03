@@ -7,12 +7,10 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyMovement : MonoBehaviour
 {
     public GameObject player;
-    public int speed = 20;
     public EnemyDetection detection;
     public GameOverScreen gameOverScreen;
     public CharacterMovement hide;
-    public EnemyDoorInteraction tp;
-
+    public patrullar patrol;
     void Start()
     {
         if(player != null)
@@ -29,12 +27,13 @@ public class EnemyMovement : MonoBehaviour
 
     void MovementTowardsPlayer()
     {
-        if(player!= null)
+        if (detection.vision && !hide.isHiding)
         {
-            if (detection.vision && !hide.isHiding)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-            }
+            detection.FollowPlayer(transform);
+        }
+        else
+        {
+            patrol.FollowPath();
         }
     }
 

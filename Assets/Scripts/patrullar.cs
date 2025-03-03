@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class patrullar : MonoBehaviour
 {
+    private bool ispatrol = true;
     [SerializeField] private float velocidadMovimiento;
     [SerializeField] private Transform[] puntosMovimiento;
     [SerializeField] private float distanciMinima;
@@ -14,7 +15,7 @@ public class patrullar : MonoBehaviour
         numeroAleatorio = Random.Range(0, puntosMovimiento.Length);
     }
 
-    private void Update()
+    public void FollowPath()
     {
         transform.position = Vector2.MoveTowards(transform.position, puntosMovimiento[numeroAleatorio].position, velocidadMovimiento * Time.deltaTime);
         if (Vector2.Distance(transform.position, puntosMovimiento[numeroAleatorio].position) < distanciMinima)

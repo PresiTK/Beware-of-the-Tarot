@@ -1198,6 +1198,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1635825275}
+  hide: 0
+  shown: {fileID: 0}
+  notseen: 0
 --- !u!61 &148498471
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3579,7 +3582,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedX: 1
   speedY: 1
-  position: {x: 0, y: 0, z: 0}
   tp: {fileID: 655306131}
   door: {fileID: 0}
 --- !u!212 &442889869
@@ -4723,6 +4725,10 @@ PrefabInstance:
       propertyPath: speed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4291738378478797511, guid: d4f7cf56faa5aa240aa314df084ce327, type: 3}
+      propertyPath: patrol
+      value: 
+      objectReference: {fileID: 1569203951}
     - target: {fileID: 4291738378478797511, guid: d4f7cf56faa5aa240aa314df084ce327, type: 3}
       propertyPath: player
       value: 
