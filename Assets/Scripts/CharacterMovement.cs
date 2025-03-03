@@ -37,6 +37,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E)){
             pressingHide = !pressingHide;
+
         }
         if (Input.GetKeyDown(KeyCode.F))
         {

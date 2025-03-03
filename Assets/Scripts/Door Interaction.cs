@@ -7,6 +7,8 @@ public class DoorInteraction : MonoBehaviour
 {
     private bool enter = false;
     public GameObject door;
+    public CharacterMovement ubi;
+    public CameraTp teleport;
     private Vector2 teleportPosition = Vector2.zero;
     private void Update()
     {
