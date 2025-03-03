@@ -15,6 +15,7 @@ public class DoorInteraction : MonoBehaviour
         if (enter && Input.GetKeyDown(KeyCode.E))
         {
             Teleport();
+            teleport.TpCam();
         }
     }
 

@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
 
     public float alpha = 1.0f;
     public GameObject target = null;
+    public CameraTp replace;
     private bool isHiding = false;
     private bool pressingHide = false;
 
@@ -26,8 +27,16 @@ public class Movement : MonoBehaviour
     {
         if(target!= null)
         {
-            targetPosition = target.transform.position;
-            CurrentPosition = transform.position;
+            if (!replace.Camreplace)
+            {
+                targetPosition.x = target.transform.position.x;
+                CurrentPosition = transform.position;
+            }
+            else
+            {
+                transform.position=replace.transform.position;
+                replace.Camreplace = false;
+            }
         }
         transform.position=Vector2.Lerp(CurrentPosition, targetPosition, alpha * Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.F))
