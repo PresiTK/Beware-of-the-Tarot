@@ -7,10 +7,14 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyMovement : MonoBehaviour
 {
     public GameObject player;
-    public int speed = 20;
     public EnemyDetection detection;
     public GameOverScreen gameOverScreen;
     public CharacterMovement hide;
+    public patrullar patrol;
+    private bool enter = false;
+    public GameObject door;
+    private Vector2 teleportPosition = Vector2.zero;
+
     void Start()
     {
         if(player != null)
@@ -27,12 +31,18 @@ public class EnemyMovement : MonoBehaviour
 
     void MovementTowardsPlayer()
     {
-        if(player!= null)
+        if (detection.vision && !hide.isHiding)
         {
-            if (detection.vision && !hide.isHiding)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-            }
+            detection.FollowPlayer(transform);
+        }
+        else
+        {
+            patrol.FollowPath();
+        }
+        if(enter)
+        {
+            Teleport();
+            patrol.FollowPath();
         }
     }
 
@@ -43,6 +53,34 @@ public class EnemyMovement : MonoBehaviour
             Destroy(collision.gameObject);
             gameOverScreen.GameOverMenu();
 
+        }
+        if (collision.gameObject.tag.Equals("Door"))
+        {
+            door = collision.gameObject;
+            Enlace link = collision.gameObject.GetComponent<Enlace>();
+            if (link != null)
+            {
+                teleportPosition = link.GetTeleportPosition();
+                enter = true;
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Door"))
+        {
+            door = null;
+            enter = false;
+        }
+    }
+
+    private void Teleport()
+    {
+        if (door != null)
+        {
+            transform.position = teleportPosition;
+            door = null;
+            enter = false;
         }
     }
 }

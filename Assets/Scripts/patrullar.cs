@@ -14,7 +14,7 @@ public class patrullar : MonoBehaviour
         numeroAleatorio = Random.Range(0, puntosMovimiento.Length);
     }
 
-    private void Update()
+    public void FollowPath()
     {
         transform.position = Vector2.MoveTowards(transform.position, puntosMovimiento[numeroAleatorio].position, velocidadMovimiento * Time.deltaTime);
         if (Vector2.Distance(transform.position, puntosMovimiento[numeroAleatorio].position) < distanciMinima)
