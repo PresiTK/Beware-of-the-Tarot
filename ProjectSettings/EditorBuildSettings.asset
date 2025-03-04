@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 9d109b552dceaf04aadca0c7afe6535e
   - enabled: 1
     path: Assets/Scenes/Eloi Scene.unity
     guid: 834b93d50f347ca4a862f9670b61898e
