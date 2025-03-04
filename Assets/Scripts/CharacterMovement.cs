@@ -202,6 +202,7 @@ public class CharacterMovement : MonoBehaviour
         {
             HideInPlace(pressingHide);
         }
+
     }
 
     private void HideInPlace(bool hide) {

@@ -9,6 +9,7 @@ public class DoorInteraction : MonoBehaviour
     public GameObject door;
     public CharacterMovement ubi;
     public CameraTp teleport;
+    public Movement verify;
     private Vector2 teleportPosition = Vector2.zero;
     private void Update()
     {
@@ -16,6 +17,7 @@ public class DoorInteraction : MonoBehaviour
         {
             Teleport();
             teleport.TpCam();
+            verify.isInRoom = true;
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraTp : MonoBehaviour
 {
-    public CharacterMovement ubication;
+    public GameObject ubication;
     public bool Camreplace = false;
     public void TpCam()
     {
