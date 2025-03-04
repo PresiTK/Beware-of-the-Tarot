@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.SceneManagement;
 
 public class EnemyMovement : MonoBehaviour
 {
     public GameObject player;
     public EnemyDetection detection;
-    public GameOverScreen gameOverScreen;
     public CharacterMovement hide;
     public patrullar patrol;
     private bool enter = false;
@@ -51,7 +51,7 @@ public class EnemyMovement : MonoBehaviour
         if (collision.gameObject.tag.Equals("Player"))
         {
             Destroy(collision.gameObject);
-            gameOverScreen.GameOverMenu();
+            SceneManager.LoadSceneAsync(2);
 
         }
         if (collision.gameObject.tag.Equals("Door"))
