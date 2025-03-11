@@ -28,8 +28,11 @@ public class CameraMovement : MonoBehaviour
 
     private void FollowTarget()
     {
-        lastTargetPosition.x = target.transform.position.x;
-        transform.position = Vector2.Lerp(transform.position, lastTargetPosition, speed * Time.deltaTime);
+        if(target != null)
+        {
+            lastTargetPosition.x = target.transform.position.x;
+            transform.position = Vector2.Lerp(transform.position, lastTargetPosition, speed * Time.deltaTime);
+        }
     }
 
     public void TeleportToRoom(Vector2 roomPosition)

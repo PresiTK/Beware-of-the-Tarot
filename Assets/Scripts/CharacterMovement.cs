@@ -43,6 +43,10 @@ public class CharacterMovement : MonoBehaviour
         {
             light_flash = !light_flash;
         }
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            isHiding = !isHiding ;
+        }
     }
 
     private void FixedUpdate()
