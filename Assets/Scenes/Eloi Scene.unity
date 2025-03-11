@@ -8208,10 +8208,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1165553820}
-  - component: {fileID: 1165553822}
   - component: {fileID: 1165553824}
   - component: {fileID: 1165553823}
-  - component: {fileID: 1165553825}
   m_Layer: 0
   m_Name: CameraControl
   m_TagString: Untagged
@@ -8235,22 +8233,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1165553822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165553818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7b4718f5978c3948be047a3ff339cc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alpha: 1
-  target: {fileID: 1635825275}
-  replace: {fileID: 1165553825}
-  isInRoom: 1
 --- !u!61 &1165553823
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8323,20 +8305,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1165553825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165553818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebdfeb5f542a5e04cb8c914c821cc0ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ubication: {fileID: 1635825275}
-  Camreplace: 0
 --- !u!1 &1206207694
 GameObject:
   m_ObjectHideFlags: 0
@@ -11844,8 +11812,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 0}
   ubi: {fileID: 1635825278}
-  teleport: {fileID: 1165553825}
-  verify: {fileID: 1165553822}
+  teleport: {fileID: 0}
+  verify: {fileID: 0}
 --- !u!114 &1635825282
 MonoBehaviour:
   m_ObjectHideFlags: 0

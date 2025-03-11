@@ -9,15 +9,15 @@ public class DoorInteraction : MonoBehaviour
     public GameObject door;
     public CharacterMovement ubi;
     public CameraTp teleport;
-    public Movement verify;
+    public CameraMovement cameraMovement;
     private Vector2 teleportPosition = Vector2.zero;
     private void Update()
     {
         if (enter && Input.GetKeyDown(KeyCode.E))
         {
             Teleport();
-            teleport.TpCam();
-            verify.isInRoom = true;
+            cameraMovement.TeleportToRoom(new Vector2(0, transform.position.y));
+            cameraMovement.isInRoom = true;
         }
     }
 
