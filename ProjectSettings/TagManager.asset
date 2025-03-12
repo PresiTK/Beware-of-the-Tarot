@@ -11,6 +11,7 @@ TagManager:
   - puntos
   - win
   - Room
+  - Interact
   layers:
   - Default
   - TransparentFX

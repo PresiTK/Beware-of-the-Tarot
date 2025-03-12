@@ -19,7 +19,7 @@ public class CharacterMovement : MonoBehaviour
     public float shootCadenceTime = 2.0f;
 
     public bool isHiding = false;
-    private bool pressingHide = false;
+    public bool pressingHide = false;
     
     // Start is called before the first frame update
     void Start()

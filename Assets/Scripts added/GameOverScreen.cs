@@ -19,4 +19,8 @@ public class GameOverScreen : MonoBehaviour
     {
         SceneManager.LoadScene("Eloi Scene");
     }
+    public void returnMenu()
+    {
+        SceneManager.LoadScene("Start Scene");
+    }
 }
