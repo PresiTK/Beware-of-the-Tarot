@@ -15,9 +15,10 @@ public class patrullar : MonoBehaviour
     {
         PathOrDoor();
     }
+    
+public void FollowPath()
+    {   
 
-    public void FollowPath()
-    {
         if (target == Vector2.zero)
         {
             PathOrDoor();
@@ -28,16 +29,24 @@ public class patrullar : MonoBehaviour
         {
             if (isdoor)
             {
-                target=enlace.GetTeleportPosition();
-                transform.position = target;
                 target = Vector2.zero;
+                transform.position = enlace.GetTeleportPosition();
+                StartCoroutine(BuscarSiguientePathCorutina());
                 isdoor = false;
-                return;            }
+            }
             else
             {
                 PathOrDoor();
             }
         }
+    }
+    private IEnumerator BuscarSiguientePathCorutina()
+    {
+        // Espera 0.5 segundos
+        yield return new WaitForSeconds(0.5f);
+
+        // Acción a ejecutar después de la espera
+        PathOrDoor();
     }
     private void PathOrDoor()
     {
