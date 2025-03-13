@@ -26,13 +26,24 @@ public class patrullar : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, target, velocidadMovimiento * Time.deltaTime);
         if (Vector2.Distance(transform.position, target) < distanciaMinima)
         {
-            PathOrDoor();
+            if (isdoor)
+            {
+                target=enlace.GetTeleportPosition();
+                transform.position = target;
+                target = Vector2.zero;
+                isdoor = false;
+                return;            }
+            else
+            {
+                PathOrDoor();
+            }
         }
     }
     private void PathOrDoor()
     {
-        int randomindex = Random.Range(0, 1);
-        if (randomindex == 0)
+        int randomnumber;
+        randomnumber = Random.Range(0, 10);
+        if (randomnumber < 7)
         {
             target = Pathscontainer.RandomPosition();
             isdoor = false;

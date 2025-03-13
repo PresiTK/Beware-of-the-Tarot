@@ -22,13 +22,14 @@ public class ObtainPathFromRooms : MonoBehaviour
         }
     }
 
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Room")
-    //    {
-    //        transforms = null;
-    //    }
-    //}
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Room")
+        {
+            transforms = null;
+            enlaces = null;
+        }
+    }
     public Vector2 RandomPosition()
     {
         if(transforms == null || transforms.Length==0)
