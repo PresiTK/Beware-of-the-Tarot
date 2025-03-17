@@ -48,7 +48,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals("Player"))
+        if (collision.gameObject.tag.Equals("Player")&& !hide.isHiding)
         {
             Destroy(collision.gameObject);
             gameOverScreen.GameOverMenu();
