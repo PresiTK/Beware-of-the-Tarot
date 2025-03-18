@@ -17,37 +17,32 @@ public class patrullar : MonoBehaviour
     }
     
 public void FollowPath()
-    {   
-
-        if (target == Vector2.zero)
+    {
+        if (Pathscontainer.Recall)
         {
-            PathOrDoor();
-            return;
-        }
-        transform.position = Vector2.MoveTowards(transform.position, target, velocidadMovimiento * Time.deltaTime);
-        if (Vector2.Distance(transform.position, target) < distanciaMinima)
-        {
-            if (isdoor)
-            {
-                target = Vector2.zero;
-                transform.position = enlace.GetTeleportPosition();
-                StartCoroutine(BuscarSiguientePathCorutina());
-                isdoor = false;
-            }
-            else
+            if (target == Vector2.zero)
             {
                 PathOrDoor();
+                return;
+            }
+            transform.position = Vector2.MoveTowards(transform.position, target, velocidadMovimiento * Time.deltaTime);
+            if (Vector2.Distance(transform.position, target) < distanciaMinima)
+            {
+                if (isdoor)
+                {
+                    target = Vector2.zero;
+                    transform.position = enlace.GetTeleportPosition();
+                    isdoor = false;
+                    Pathscontainer.Recall = false;
+                }
+                else
+                {
+                    PathOrDoor();
+                }
             }
         }
     }
-    private IEnumerator BuscarSiguientePathCorutina()
-    {
-        // Espera 0.5 segundos
-        yield return new WaitForSeconds(0.5f);
-
-        // Acción a ejecutar después de la espera
-        PathOrDoor();
-    }
+  
     private void PathOrDoor()
     {
         int randomnumber;
@@ -60,7 +55,10 @@ public void FollowPath()
         else
         {
             enlace = Pathscontainer.RandomEnlace();
-            target = enlace.gameObject.transform.position;
+            if (enlace != null && enlace.gameObject != null)
+            {
+                target = enlace.gameObject.transform.position;
+            }
             isdoor = true;
         }
 

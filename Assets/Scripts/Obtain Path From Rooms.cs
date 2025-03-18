@@ -8,16 +8,23 @@ public class ObtainPathFromRooms : MonoBehaviour
     [SerializeField]
     private Transform[] transforms;
     private Enlace[] enlaces;
+    public bool Recall=false;
+    private bool onetime = true;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Room")
+        if (onetime)
         {
-            RoomPaths roomPaths = collision.gameObject.GetComponent<RoomPaths>();
-            if (roomPaths != null)
+            if (collision.gameObject.tag == "Room")
             {
-                enlaces = roomPaths.enlaces;
-                transforms = roomPaths.positions;
+                RoomPaths roomPaths = collision.gameObject.GetComponent<RoomPaths>();
+                if (roomPaths != null)
+                {
+                    enlaces = roomPaths.enlaces;
+                    transforms = roomPaths.positions;
+                    Recall = true;
+                    onetime = false; ;
+                }
             }
         }
     }
@@ -28,6 +35,8 @@ public class ObtainPathFromRooms : MonoBehaviour
         {
             transforms = null;
             enlaces = null;
+            Recall = false;
+            onetime = true;
         }
     }
     public Vector2 RandomPosition()
