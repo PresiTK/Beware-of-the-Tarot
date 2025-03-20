@@ -23,7 +23,7 @@ public class ObtainPathFromRooms : MonoBehaviour
                     enlaces = roomPaths.enlaces;
                     transforms = roomPaths.positions;
                     Recall = true;
-                    onetime = false; ;
+                    onetime = false;
                 }
             }
         }
@@ -59,4 +59,13 @@ public class ObtainPathFromRooms : MonoBehaviour
 
         return enlaces[randomindex];
     }
+    public Enlace HardcodedEnlace(int value)
+    {
+        int randomindex = value;
+
+        return enlaces[randomindex];
+    }
+
+
+
 }
