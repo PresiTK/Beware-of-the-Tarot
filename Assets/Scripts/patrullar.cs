@@ -7,10 +7,12 @@ public class patrullar : MonoBehaviour
     [SerializeField] private float velocidadMovimiento;
     [SerializeField] private ObtainPathFromRooms Pathscontainer;
     [SerializeField] private float distanciaMinima;
+    public DoorInteraction position;
     private int numeroAleatorio;
-    private Vector2 target;
+    public Vector2 target;
     private Enlace enlace;
     private bool isdoor=false;
+    private bool iswaiting=false;
     private void Start()
     {
         PathOrDoor();
@@ -45,6 +47,15 @@ public void FollowPath()
   
     private void PathOrDoor()
     {
+        if (!iswaiting)
+        {
+            StartCoroutine(WaitforPath());
+        }
+    }
+    IEnumerator WaitforPath()
+    {
+        iswaiting = true;
+        yield return new WaitForSeconds(1f);
         int randomnumber;
         randomnumber = Random.Range(0, 10);
         if (randomnumber < 7)
@@ -61,7 +72,17 @@ public void FollowPath()
             }
             isdoor = true;
         }
+        iswaiting = false;
 
     }
+    //public void FollowDoorPlayer()
+    //{
+    //    int value = 0;
+    //    while (position.teleportPosition != enlace)
+    //    {
+    //        enlace= Pathscontainer.HardcodedEnlace(value);
+    //        value++;
+    //    }
+    //}
 }
 

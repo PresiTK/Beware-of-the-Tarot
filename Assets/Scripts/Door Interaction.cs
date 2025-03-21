@@ -8,7 +8,11 @@ public class DoorInteraction : MonoBehaviour
     private bool enter = false;
     public GameObject door;
     public CameraMovement cameraMovement;
-    private Vector2 teleportPosition = Vector2.zero;
+    public EnemyDetection detection;
+    public patrullar newpoint;
+
+
+    public Vector2 teleportPosition = Vector2.zero;
     private void Update()
     {
         if (enter && Input.GetKeyDown(KeyCode.E))
@@ -45,7 +49,7 @@ public class DoorInteraction : MonoBehaviour
     private void Teleport()
     {
         if (door != null) 
-        {
+        {   
             transform.position = teleportPosition;
             door = null;
             enter = false;
