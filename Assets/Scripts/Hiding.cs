@@ -34,6 +34,5 @@ public class Hiding : MonoBehaviour
             player.transform.position = transform.position; 
         }
         return player.transform.position;
-
     }
 }

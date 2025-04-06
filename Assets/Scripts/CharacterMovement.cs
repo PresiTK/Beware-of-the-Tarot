@@ -209,21 +209,16 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
-    private void HideInPlace(bool hide) {
+    private void HideInPlace(bool hide)
+    {
         isHiding = hide;
-        if(sprRender != null)
+        if (sprRender != null)
         {
             Color col = sprRender.color;
-            if(isHiding)
-            {
-                col.a = 0.5f;
-            }
-            else
-            {
-                col.a = 1f;
-            }
+            col.a = isHiding ? 0f : 1f; // 0f = completamente invisible, 1f = visible
             sprRender.color = col;
         }
     }
+
 
 }
