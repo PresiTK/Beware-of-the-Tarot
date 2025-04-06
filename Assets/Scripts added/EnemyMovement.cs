@@ -16,6 +16,7 @@ public class EnemyMovement : MonoBehaviour
     private Vector2 teleportPosition = Vector2.zero;
     private Animator animator;
 
+
     void Start()
     {
         if(player != null)
@@ -26,6 +27,7 @@ public class EnemyMovement : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
+
     }
 
     // Update is called once per frame
@@ -36,6 +38,10 @@ public class EnemyMovement : MonoBehaviour
 
     void MovementTowardsPlayer()
     {
+        if (detection.vision == false)
+        {
+
+        }
         if (detection.vision && !hide.isHiding)
         {
             animator.SetTrigger("Run");

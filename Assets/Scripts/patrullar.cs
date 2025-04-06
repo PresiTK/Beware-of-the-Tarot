@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
+using static UnityEngine.UI.Image;
 
 public class patrullar : MonoBehaviour
 {
     [SerializeField] private float velocidadMovimiento;
     [SerializeField] private ObtainPathFromRooms Pathscontainer;
     [SerializeField] private float distanciaMinima;
+    public EnemyDetection enemyDetection;
     public DoorInteraction position;
     private int numeroAleatorio;
     public Vector2 target;
@@ -14,12 +17,19 @@ public class patrullar : MonoBehaviour
     private bool isdoor=false;
     private bool iswaiting=false;
     private Animator animator;
+    public SpriteRenderer sprite;
+
     private void Start()
     {
         if (animator == null)
         {
             animator = GetComponent<Animator>();
         }
+        if (sprite == null)
+        {
+            sprite = GetComponent<SpriteRenderer>();
+        }
+
         PathOrDoor();
         animator.SetTrigger("Walk");
     }
@@ -33,6 +43,7 @@ public class patrullar : MonoBehaviour
                 PathOrDoor();
                 return;
             }
+            CheckRotation(transform.position, target);
             transform.position = Vector2.MoveTowards(transform.position, target, velocidadMovimiento * Time.deltaTime);
             if (Vector2.Distance(transform.position, target) < distanciaMinima)
             {
@@ -53,6 +64,7 @@ public class patrullar : MonoBehaviour
   
     private void PathOrDoor()
     {
+
         if (!iswaiting)
         {
             StartCoroutine(WaitforPath());
@@ -85,6 +97,17 @@ public class patrullar : MonoBehaviour
         animator.SetTrigger("Walk");
 
 
+    }
+    void CheckRotation(Vector2 origin, Vector2 destination)
+    {
+        if (origin.x > destination.x)
+        {
+            sprite.flipX = true;
+        }
+        else
+        {
+            sprite.flipX = false;
+        }
     }
     //public void FollowDoorPlayer()
     //{

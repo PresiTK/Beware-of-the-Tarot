@@ -9,6 +9,8 @@ public class EnemyDetection : MonoBehaviour
     public GameObject player;
     public CircleCollider2D trigger;
     public float detectionRange = 5f;
+    public Animator animator;
+
 
     public SpriteRenderer sprite;
     // Start is called before the first frame update
@@ -31,6 +33,7 @@ public class EnemyDetection : MonoBehaviour
         if (collision.gameObject.tag.Equals("Player"))
         {
             vision = false;
+            animator.SetTrigger("Walk");
         }
     }
     public void FollowPlayer(Transform enemytransform)
