@@ -9,6 +9,8 @@ public class EnemyDetection : MonoBehaviour
     public GameObject player;
     public CircleCollider2D trigger;
     public float detectionRange = 5f;
+
+    public SpriteRenderer sprite;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,5 +36,18 @@ public class EnemyDetection : MonoBehaviour
     public void FollowPlayer(Transform enemytransform)
     {
         enemytransform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        CheckRotation(enemytransform.position, player.transform.position);
+    }
+
+    void CheckRotation(Vector2 origin, Vector2 destination)
+    {
+        if (origin.x > destination.x)
+        {
+            sprite.flipX = true;
+        }
+        else
+        {
+            sprite.flipX = false;
+        }
     }
 }

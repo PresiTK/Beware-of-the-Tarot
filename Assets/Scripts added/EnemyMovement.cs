@@ -14,12 +14,17 @@ public class EnemyMovement : MonoBehaviour
     private bool enter = false;
     public GameObject door;
     private Vector2 teleportPosition = Vector2.zero;
+    private Animator animator;
 
     void Start()
     {
         if(player != null)
         {
             hide=player.GetComponent<CharacterMovement>();
+        }
+        if(animator == null)
+        {
+            animator = GetComponent<Animator>();
         }
     }
 
@@ -33,6 +38,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (detection.vision && !hide.isHiding)
         {
+            animator.SetTrigger("Run");
             detection.FollowPlayer(transform);
         }
         else

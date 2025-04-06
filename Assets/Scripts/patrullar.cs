@@ -13,12 +13,18 @@ public class patrullar : MonoBehaviour
     private Enlace enlace;
     private bool isdoor=false;
     private bool iswaiting=false;
+    private Animator animator;
     private void Start()
     {
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
         PathOrDoor();
+        animator.SetTrigger("Walk");
     }
-    
-public void FollowPath()
+
+    public void FollowPath()
     {
         if (Pathscontainer.Recall)
         {
@@ -51,10 +57,13 @@ public void FollowPath()
         {
             StartCoroutine(WaitforPath());
         }
+                
     }
     IEnumerator WaitforPath()
     {
         iswaiting = true;
+        animator.SetTrigger("Stop");
+
         yield return new WaitForSeconds(1f);
         int randomnumber;
         randomnumber = Random.Range(0, 10);
@@ -73,6 +82,8 @@ public void FollowPath()
             isdoor = true;
         }
         iswaiting = false;
+        animator.SetTrigger("Walk");
+
 
     }
     //public void FollowDoorPlayer()
