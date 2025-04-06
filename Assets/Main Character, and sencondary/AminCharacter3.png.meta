@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -108,7 +108,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: AminCharacter3_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64.5
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 948f1c8c0a6188d43b64d08cf1a9c436
+      internalID: 1492589861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AminCharacter3_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64.5
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08705484a4c27804882044f11f3205c6
+      internalID: -186467661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AminCharacter3_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64.5
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 372760de863573545a0de3d99892821c
+      internalID: 1178636183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AminCharacter3_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64.5
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4394b7fd6d4f73f43b5865e01a56f5b0
+      internalID: -1668192764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AminCharacter3_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64.5
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da2e8f7481845b64d80e6a6a039dad41
+      internalID: 537548512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AminCharacter3_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64.5
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3b33bba6b57b5f45a765a3c804cce33
+      internalID: 1529235996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +245,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      AminCharacter3_0: 1492589861
+      AminCharacter3_1: -186467661
+      AminCharacter3_2: 1178636183
+      AminCharacter3_3: -1668192764
+      AminCharacter3_4: 537548512
+      AminCharacter3_5: 1529235996
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

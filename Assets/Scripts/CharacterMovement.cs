@@ -20,13 +20,15 @@ public class CharacterMovement : MonoBehaviour
 
     public bool isHiding = false;
     public bool pressingHide = false;
-    
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         light_flash = false;
         rb2d = GetComponent<Rigidbody2D>();
         sprRender = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -62,6 +64,7 @@ public class CharacterMovement : MonoBehaviour
             case Direction.UP:
                 vInput = 1;
                 break;
+
             case Direction.DOWN:
                 vInput = -1;
                 break;
@@ -103,16 +106,17 @@ public class CharacterMovement : MonoBehaviour
         int horizontal = 0;
         int vertical = 0;
 
-        if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow)) { vertical += 1; horizontal += 1; Debug.Log("EY EY"); }
+        if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow)) { vertical += 1; horizontal += 1; ;  }
         else if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftArrow)) { vertical -= 1; horizontal -= 1; }
-        else if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow)) { vertical += 1; horizontal -= 1; }
-        else if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow)) { vertical -= 1; horizontal += 1; }
+        else if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow)) { vertical += 1; horizontal -= 1;}
+        else if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow)) { vertical -= 1; horizontal += 1;}
         else
         {
             if (Input.GetKey(KeyCode.DownArrow)) { vertical -= 1; }
             if (Input.GetKey(KeyCode.UpArrow)) { vertical += 1; }
-            if (Input.GetKey(KeyCode.LeftArrow)) { horizontal -= 1; }
-            if (Input.GetKey(KeyCode.RightArrow)) { horizontal += 1; }
+            if (Input.GetKey(KeyCode.LeftArrow)) { horizontal -= 1;}
+            if (Input.GetKey(KeyCode.RightArrow)) { horizontal += 1;}
+
         }
 
         if (vertical == horizontal)
@@ -120,11 +124,12 @@ public class CharacterMovement : MonoBehaviour
             if (vertical < 0)
             {
                 direction = Direction.DIAGONAL_DOWN_LEFT;
+                animator.SetTrigger("Left");
             }
             if (horizontal > 0)
             {
                 direction = Direction.DIAGONAL_UP_RIGHT;
-                Debug.Log("OOOO");
+                animator.SetTrigger("Right");
             }
         }
         else if (vertical * (-1) == horizontal)
@@ -132,10 +137,14 @@ public class CharacterMovement : MonoBehaviour
             if (vertical < horizontal)
             {
                 direction = Direction.DIAGONAL_DOWN_RIGHT;
+                animator.SetTrigger("Right");
+
             }
             if (vertical > horizontal)
             {
                 direction = Direction.DIAGONAL_UP_LEFT;
+                animator.SetTrigger("Left");
+
             }
         }
         else
@@ -143,19 +152,28 @@ public class CharacterMovement : MonoBehaviour
             if (vertical > 0)
             {
                 direction = Direction.UP;
+                animator.SetTrigger("Up");
             }
             else if (vertical < 0)
             {
                 direction = Direction.DOWN;
+                animator.SetTrigger("down");
             }
 
             if (horizontal < 0)
             {
                 direction = Direction.LEFT;
+                animator.SetTrigger("Left");
+
             }
             else if (horizontal > 0)
             {
+                animator.SetTrigger("Right");
                 direction = Direction.RIGHT;
+            }
+            else
+            {
+                animator.SetTrigger("static");
             }
         }
     }
