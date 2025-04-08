@@ -9,6 +9,7 @@ public class Interaction : MonoBehaviour
     [SerializeField] private float deactivateTime = 2.0f;
     [SerializeField] private float currentTime = 0;
     private bool textActive;
+    private bool mensaje;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +24,12 @@ public class Interaction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && textActive == false)
             {
-                text.SetActive(true);
-                textActive = true;
-                currentTime = deactivateTime;
+                if (mensaje)
+                {
+                    text.SetActive(true);
+                    textActive = true;
+                    currentTime = deactivateTime;
+                }
             }
         }
         else if(currentTime > 0)
@@ -36,6 +40,20 @@ public class Interaction : MonoBehaviour
                 textActive = false;
                 text.SetActive(false);
             }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            mensaje = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            mensaje = false;
         }
     }
 }

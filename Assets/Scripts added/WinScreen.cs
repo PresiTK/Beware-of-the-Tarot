@@ -17,6 +17,6 @@ public class WinScreen : MonoBehaviour
     }
     public void Restart()
     {
-        SceneManager.LoadScene("Eloi Scene");
+        SceneManager.LoadScene("GameScene");
     }
 }

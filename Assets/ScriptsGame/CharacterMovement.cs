@@ -233,7 +233,7 @@ public class CharacterMovement : MonoBehaviour
         if (sprRender != null)
         {
             Color col = sprRender.color;
-            col.a = isHiding ? 0f : 1f; // 0f = completamente invisible, 1f = visible
+            col.a = isHiding ? 0f : 1f; 
             sprRender.color = col;
         }
     }
