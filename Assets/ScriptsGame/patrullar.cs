@@ -13,11 +13,13 @@ public class patrullar : MonoBehaviour
     public DoorInteraction position;
     private int numeroAleatorio;
     public Vector2 target;
+    private Vector2 info;
     private Enlace enlace;
     private bool isdoor=false;
     private bool iswaiting=false;
     private Animator animator;
     public SpriteRenderer sprite;
+    private BoxCollider2D boxCollider;
 
     private void Start()
     {
@@ -29,7 +31,7 @@ public class patrullar : MonoBehaviour
         {
             sprite = GetComponent<SpriteRenderer>();
         }
-
+        boxCollider = GetComponent<BoxCollider2D>();
         PathOrDoor();
         animator.SetTrigger("Walk");
     }
@@ -45,7 +47,10 @@ public class patrullar : MonoBehaviour
             }
             CheckRotation(transform.position, target);
             transform.position = Vector2.MoveTowards(transform.position, target, velocidadMovimiento * Time.deltaTime);
-            if (Vector2.Distance(transform.position, target) < distanciaMinima)
+            Vector2 offsetedpos = transform.position;
+            offsetedpos.y+=boxCollider.offset.y;
+            info = offsetedpos;
+            if (Vector2.Distance(offsetedpos, target) < distanciaMinima)
             {
                 if (isdoor)
                 {

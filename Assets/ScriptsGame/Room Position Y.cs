@@ -6,8 +6,13 @@ public class RoomPositionY : MonoBehaviour
 {
     public float positionX;
     public float positionY;
-    public bool drawGizmos = true;
+    public bool drawGizmos = false;
 
+    private void Awake()
+    {
+        positionX = transform.position.x;
+        positionY = transform.position.y;
+    }
 
     private void OnDrawGizmos()
     {

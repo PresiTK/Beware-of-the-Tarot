@@ -21,6 +21,7 @@ public class CharacterMovement : MonoBehaviour
     public bool isHiding = false;
     public bool pressingHide = false;
     private Animator animator;
+    private Vector2 vector2;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,7 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         UpdateDirection();
+        PlayAnimation();
         Shoot();
 
         if (Input.GetKeyDown(KeyCode.E)){
@@ -59,7 +61,7 @@ public class CharacterMovement : MonoBehaviour
         //Separamos l�gica de f�sica
         float hInput = 0;
         float vInput = 0;
-
+      
         switch (direction){
             case Direction.UP:
                 vInput = 1;
@@ -93,8 +95,10 @@ public class CharacterMovement : MonoBehaviour
             default:
                 break;
         }
-
-        rb2d.velocity = new Vector2(hInput * speedX * Time.fixedDeltaTime, vInput * speedY * Time.fixedDeltaTime);
+       
+        Vector2 movement = new Vector2(hInput,vInput).normalized;
+        vector2 = movement;
+        rb2d.velocity = new Vector2(movement.x * speedX * Time.fixedDeltaTime, movement.y * speedY * Time.fixedDeltaTime);
     }
 
     private void UpdateDirection()
@@ -118,18 +122,19 @@ public class CharacterMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.RightArrow)) { horizontal += 1;}
 
         }
-
+        if (vertical == 0 && horizontal == 0)
+        {
+            direction =Direction.NONE;
+        }
         if (vertical == horizontal)
         {
             if (vertical < 0)
             {
                 direction = Direction.DIAGONAL_DOWN_LEFT;
-                animator.SetTrigger("Left");
             }
             if (horizontal > 0)
             {
                 direction = Direction.DIAGONAL_UP_RIGHT;
-                animator.SetTrigger("Right");
             }
         }
         else if (vertical * (-1) == horizontal)
@@ -137,13 +142,11 @@ public class CharacterMovement : MonoBehaviour
             if (vertical < horizontal)
             {
                 direction = Direction.DIAGONAL_DOWN_RIGHT;
-                animator.SetTrigger("Right");
 
             }
             if (vertical > horizontal)
             {
                 direction = Direction.DIAGONAL_UP_LEFT;
-                animator.SetTrigger("Left");
 
             }
         }
@@ -152,34 +155,26 @@ public class CharacterMovement : MonoBehaviour
             if (vertical > 0)
             {
                 direction = Direction.UP;
-                animator.SetTrigger("Up");
             }
             else if (vertical < 0)
             {
                 direction = Direction.DOWN;
-                animator.SetTrigger("down");
             }
 
             if (horizontal < 0)
             {
                 direction = Direction.LEFT;
-                animator.SetTrigger("Left");
 
             }
             else if (horizontal > 0)
             {
-                animator.SetTrigger("Right");
                 direction = Direction.RIGHT;
-            }
-            else
-            {
-                animator.SetTrigger("static");
             }
         }
     }
 
     private void Shoot(){   
-        if (Input.GetKeyDown(KeyCode.Space)){//Haced esto en lugar de una corrutina pls :(
+        if (Input.GetKeyDown(KeyCode.Space)){
             currShootTime = 0;
             Debug.Log("START SHOOTING");
         }else if (Input.GetKey(KeyCode.Space)){
@@ -237,6 +232,33 @@ public class CharacterMovement : MonoBehaviour
             sprRender.color = col;
         }
     }
-
+    private void PlayAnimation()
+    {
+        switch (direction)
+        {
+            case Direction.NONE:
+                animator.SetTrigger("Static");
+                break;
+            case Direction.UP:
+                animator.SetTrigger("Up");
+                break;
+            case Direction.DOWN:
+                animator.SetTrigger("Down");
+                break;
+            case Direction.DIAGONAL_UP_LEFT:
+            case Direction.DIAGONAL_DOWN_LEFT:
+            case Direction.LEFT:
+                animator.SetTrigger("Left");
+                break;
+            case Direction.DIAGONAL_DOWN_RIGHT:
+            case Direction.DIAGONAL_UP_RIGHT:
+            case Direction.RIGHT:
+                animator.SetTrigger("Right");
+                break;
+            default:
+                animator.SetTrigger("Static");
+                break;
+        }
+    }
 
 }
