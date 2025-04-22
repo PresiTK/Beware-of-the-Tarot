@@ -5,6 +5,8 @@ using UnityEngine;
 public class Hiding : MonoBehaviour
 {
     public GameObject player;
+    [SerializeField] private GameObject image;
+
     private bool hide = false;
 
     private void Update()
@@ -18,6 +20,7 @@ public class Hiding : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
+            image.SetActive(true);
             hide = true;
         }
     }
@@ -25,6 +28,7 @@ public class Hiding : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         hide = false;
+        image.SetActive(false);
     }
 
     public Vector2 TeleportPlayer()

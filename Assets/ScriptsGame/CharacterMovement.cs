@@ -19,6 +19,8 @@ public class CharacterMovement : MonoBehaviour
     public float shootCadenceTime = 2.0f;
 
     public bool isHiding = false;
+    public bool isSearching = false;
+
     public bool pressingHide = false;
     private Animator animator;
     private Vector2 vector2;
@@ -55,14 +57,23 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isSearching)
+        {
+            moving();
+        }
+    }
+
+    private void moving()
+    {
         //Siempre comprobar si los componentes existen antes de usarlos
         if (rb2d == null) { return; } //Si no existe me piro y no hago nada, me ahorro c�lculos
 
         //Separamos l�gica de f�sica
         float hInput = 0;
         float vInput = 0;
-      
-        switch (direction){
+
+        switch (direction)
+        {
             case Direction.UP:
                 vInput = 1;
                 break;
@@ -95,12 +106,11 @@ public class CharacterMovement : MonoBehaviour
             default:
                 break;
         }
-       
-        Vector2 movement = new Vector2(hInput,vInput).normalized;
+
+        Vector2 movement = new Vector2(hInput, vInput).normalized;
         vector2 = movement;
         rb2d.velocity = new Vector2(movement.x * speedX * Time.fixedDeltaTime, movement.y * speedY * Time.fixedDeltaTime);
     }
-
     private void UpdateDirection()
     {
         //Separamos l�gica de f�sica
