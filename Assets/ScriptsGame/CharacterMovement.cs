@@ -14,7 +14,7 @@ public class CharacterMovement : MonoBehaviour
     SpriteRenderer sprRender;
 
     public Direction direction = Direction.NONE;
-
+    public Pause pause;
     public float currShootTime = 0;
     public float shootCadenceTime = 2.0f;
 
@@ -52,6 +52,10 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1))
         {
             isHiding = !isHiding ;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) && pause.pauseMenu != null)
+        {
+            pause.Resume();
         }
     }
 
