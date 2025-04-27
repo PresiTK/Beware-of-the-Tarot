@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,19 +6,21 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-    [SerializeField] private GameObject text;
+    public static event Action OnWin;
+    public static event Action<bool> OnCardNotFound;
+
     [SerializeField] private GameObject image;
 
     [SerializeField] private float deactivateTime = 2.0f;
     [SerializeField] private float currentTime = 0;
     private bool textActive;
     private bool mensaje;
+    public bool winCondition;
     public CharacterMovement player;
     // Start is called before the first frame update
     void Start()
     {
         textActive = false;
-        text.SetActive(false);
     }
 
     // Update is called once per frame
@@ -29,12 +32,15 @@ public class Interaction : MonoBehaviour
             {
                 if (mensaje)
                 {
-                    text.SetActive(true);
-                    textActive = true;
-                    currentTime = deactivateTime;
-                    player.isSearching = true;
-
-                }
+                    if (!winCondition)
+                    {
+                        DisplayText();
+                    }
+                    else
+                    {
+                        OnWin?.Invoke();
+                    }
+                }   
             }
         }
         else if(currentTime > 0)
@@ -42,13 +48,23 @@ public class Interaction : MonoBehaviour
             currentTime -= Time.deltaTime;
             if(currentTime <= 0)
             {
-                player.isSearching = false;
-                textActive = false;
-                text.SetActive(false);
-                player.isSearching = false;
-
+                HideText();
             }
         }
+    }
+    private void DisplayText()
+    {
+        OnCardNotFound?.Invoke(true);
+        textActive = true;
+        currentTime = deactivateTime;
+        player.isSearching = true;
+    }
+    private void HideText()
+    {
+        player.isSearching = false;
+        textActive = false;
+        OnCardNotFound?.Invoke(false);
+        player.isSearching = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

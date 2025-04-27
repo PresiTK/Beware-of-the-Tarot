@@ -9,6 +9,8 @@ public class CharacterMovement : MonoBehaviour
     public float speedX = 1;
     public float speedY = 1;
     public bool light_flash;
+    public float runingMultyply = 2f;
+    private bool isRunning= false;
 
     Rigidbody2D rb2d;
     SpriteRenderer sprRender;
@@ -43,7 +45,6 @@ public class CharacterMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E)){
             pressingHide = !pressingHide;
-
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -53,14 +54,17 @@ public class CharacterMovement : MonoBehaviour
         {
             isHiding = !isHiding ;
         }
+
+
+        isRunning = Input.GetKey(KeyCode.LeftShift);
+  
+
     }
 
     private void FixedUpdate()
     {
-        if (!isSearching)
-        {
-            moving();
-        }
+        moving();
+
     }
 
     private void moving()
@@ -109,7 +113,15 @@ public class CharacterMovement : MonoBehaviour
 
         Vector2 movement = new Vector2(hInput, vInput).normalized;
         vector2 = movement;
-        rb2d.velocity = new Vector2(movement.x * speedX * Time.fixedDeltaTime, movement.y * speedY * Time.fixedDeltaTime);
+        if (isRunning)
+        {
+            rb2d.velocity = new Vector2(movement.x * speedX*runingMultyply * Time.fixedDeltaTime, movement.y * speedY*runingMultyply * Time.fixedDeltaTime);
+
+        }
+        else
+        {
+            rb2d.velocity = new Vector2(movement.x * speedX * Time.fixedDeltaTime, movement.y * speedY * Time.fixedDeltaTime);
+        }
     }
     private void UpdateDirection()
     {
@@ -180,6 +192,10 @@ public class CharacterMovement : MonoBehaviour
             {
                 direction = Direction.RIGHT;
             }
+        }
+        if (isSearching)
+        {
+            direction = Direction.NONE;
         }
     }
 
