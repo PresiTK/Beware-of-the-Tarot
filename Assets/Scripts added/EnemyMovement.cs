@@ -14,12 +14,18 @@ public class EnemyMovement : MonoBehaviour
     private bool enter = false;
     public GameObject door;
     private Vector2 teleportPosition = Vector2.zero;
+    private Animator animator;
+
 
     void Start()
     {
         if(player != null)
         {
             hide=player.GetComponent<CharacterMovement>();
+        }
+        if(animator == null)
+        {
+            animator = GetComponent<Animator>();
         }
     }
 
@@ -31,8 +37,13 @@ public class EnemyMovement : MonoBehaviour
 
     void MovementTowardsPlayer()
     {
+        if (detection.vision == false)
+        {
+
+        }
         if (detection.vision && !hide.isHiding)
         {
+            animator.SetTrigger("Run");
             detection.FollowPlayer(transform);
         }
         else
@@ -48,7 +59,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals("Player"))
+        if (collision.gameObject.tag.Equals("Player")&& !hide.isHiding)
         {
             Destroy(collision.gameObject);
             SceneManager.LoadSceneAsync(2);

@@ -10,11 +10,13 @@ TagManager:
   - Patrol
   - puntos
   - win
+  - Room
+  - Interact
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Characters
   - Water
   - UI
   - 
