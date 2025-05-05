@@ -31,7 +31,6 @@ public class CharacterMovement : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         sprRender = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
