@@ -54,10 +54,10 @@ public class CharacterMovement : MonoBehaviour
         {
             isHiding = !isHiding ;
         }
-        if (Input.GetKeyDown(KeyCode.Escape) && pause.pauseMenu != null)
-        {
-            pause.Resume();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape) && pause.pauseMenu != null)
+        //{
+        //    pause.Resume();
+        //}
 
         isRunning = Input.GetKey(KeyCode.LeftShift);
   
