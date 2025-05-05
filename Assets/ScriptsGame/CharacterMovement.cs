@@ -27,6 +27,7 @@ public class CharacterMovement : MonoBehaviour
     private Animator animator;
     private Vector2 vector2;
     // Start is called before the first frame update
+
     void Start()
     {
         light_flash = false;
@@ -43,9 +44,7 @@ public class CharacterMovement : MonoBehaviour
         PlayAnimation();
         Shoot();
 
-        if (Input.GetKeyDown(KeyCode.E)){
-            pressingHide = !pressingHide;
-        }
+    
         if (Input.GetKeyDown(KeyCode.F))
         {
             light_flash = !light_flash;
@@ -59,6 +58,18 @@ public class CharacterMovement : MonoBehaviour
         isRunning = Input.GetKey(KeyCode.LeftShift);
   
 
+    }
+    private void OnEnable()
+    {
+        InputController.OnInteract += TogglePressingHide;
+    }
+    private void OnDisable()
+    {
+        InputController.OnInteract -= TogglePressingHide;
+    }
+    private void TogglePressingHide()
+    {
+        pressingHide = !pressingHide;
     }
 
     private void FixedUpdate()

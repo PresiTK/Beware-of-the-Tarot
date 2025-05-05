@@ -41,7 +41,7 @@ public class CameraMovement : MonoBehaviour
             target.transform.position.x,
             roomPosition.y
         );
-        transform.position = newPosition;
+        transform.position = roomPosition;
         lastTargetPosition = newPosition;
 
         isInRoom = false;
@@ -57,7 +57,7 @@ public class CameraMovement : MonoBehaviour
                 {
                     TeleportToRoom(
                         new Vector2(
-                            0, 
+                            roomPositionY.positionX, 
                             roomPositionY.positionY
                             )
                         );
