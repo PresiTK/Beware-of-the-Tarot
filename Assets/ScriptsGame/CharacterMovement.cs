@@ -260,30 +260,63 @@ public class CharacterMovement : MonoBehaviour
     }
     private void PlayAnimation()
     {
-        switch (direction)
+        if (isRunning)
         {
-            case Direction.NONE:
-                animator.SetTrigger("Static");
-                break;
-            case Direction.UP:
-                animator.SetTrigger("Up");
-                break;
-            case Direction.DOWN:
-                animator.SetTrigger("Down");
-                break;
-            case Direction.DIAGONAL_UP_LEFT:
-            case Direction.DIAGONAL_DOWN_LEFT:
-            case Direction.LEFT:
-                animator.SetTrigger("Left");
-                break;
-            case Direction.DIAGONAL_DOWN_RIGHT:
-            case Direction.DIAGONAL_UP_RIGHT:
-            case Direction.RIGHT:
-                animator.SetTrigger("Right");
-                break;
-            default:
-                animator.SetTrigger("Static");
-                break;
+            switch (direction)
+            {
+
+                case Direction.NONE:
+                    animator.SetTrigger("Static");
+                    break;
+                case Direction.UP:
+                    animator.SetTrigger("RuningUp");
+                    break;
+                case Direction.DOWN:
+                    animator.SetTrigger("RuningDown");
+                    break;
+                case Direction.DIAGONAL_UP_LEFT:
+                case Direction.DIAGONAL_DOWN_LEFT:
+                case Direction.LEFT:
+                    animator.SetTrigger("RuningLeft");
+                    break;
+                case Direction.DIAGONAL_DOWN_RIGHT:
+                case Direction.DIAGONAL_UP_RIGHT:
+                case Direction.RIGHT:
+                    animator.SetTrigger("RuningRight");
+                    break;
+                default:
+                    animator.SetTrigger("Static");
+                    break;
+            }
+        }
+        else
+        {
+            switch (direction)
+            {
+
+                case Direction.NONE:
+                    animator.SetTrigger("Static");
+                    break;
+                case Direction.UP:
+                    animator.SetTrigger("Up");
+                    break;
+                case Direction.DOWN:
+                    animator.SetTrigger("Down");
+                    break;
+                case Direction.DIAGONAL_UP_LEFT:
+                case Direction.DIAGONAL_DOWN_LEFT:
+                case Direction.LEFT:
+                    animator.SetTrigger("Left");
+                    break;
+                case Direction.DIAGONAL_DOWN_RIGHT:
+                case Direction.DIAGONAL_UP_RIGHT:
+                case Direction.RIGHT:
+                    animator.SetTrigger("Right");
+                    break;
+                default:
+                    animator.SetTrigger("Static");
+                    break;
+            }
         }
     }
 
