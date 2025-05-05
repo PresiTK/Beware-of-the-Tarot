@@ -15,6 +15,7 @@ public class CharacterMovement : MonoBehaviour
     Rigidbody2D rb2d;
     SpriteRenderer sprRender;
 
+    public Pause pause;
     public Direction direction = Direction.NONE;
 
     public float currShootTime = 0;
@@ -53,7 +54,10 @@ public class CharacterMovement : MonoBehaviour
         {
             isHiding = !isHiding ;
         }
-
+        if (Input.GetKeyDown(KeyCode.Escape) && pause.pauseMenu != null)
+        {
+            pause.Resume();
+        }
 
         isRunning = Input.GetKey(KeyCode.LeftShift);
   
