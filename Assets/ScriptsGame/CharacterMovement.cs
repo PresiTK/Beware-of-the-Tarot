@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public enum Direction { NONE, UP, DOWN, LEFT, RIGHT , DIAGONAL_UP_RIGHT, DIAGONAL_UP_LEFT, DIAGONAL_DOWN_RIGHT, DIAGONAL_DOWN_LEFT };
 public class CharacterMovement : MonoBehaviour
 {
     public float speedX = 1;
     public float speedY = 1;
-    public bool light_flash;
+    public bool light_flash=false;
     public float runingMultyply = 2f;
     private bool isRunning= false;
 
     Rigidbody2D rb2d;
     SpriteRenderer sprRender;
 
+    public GameObject flashlight;
     public Pause pause;
     public Direction direction = Direction.NONE;
 
@@ -35,6 +37,7 @@ public class CharacterMovement : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         sprRender = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        flashlight.SetActive(light_flash);
 
     }
 
@@ -49,6 +52,7 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             light_flash = !light_flash;
+            flashlight.SetActive(light_flash);
         }
         if (Input.GetKeyDown(KeyCode.F1))
         {
@@ -282,25 +286,31 @@ public class CharacterMovement : MonoBehaviour
 
                 case Direction.NONE:
                     animator.SetTrigger("Static");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
                 case Direction.UP:
                     animator.SetTrigger("RuningUp");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 0);
                     break;
                 case Direction.DOWN:
                     animator.SetTrigger("RuningDown");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
                 case Direction.DIAGONAL_UP_LEFT:
                 case Direction.DIAGONAL_DOWN_LEFT:
                 case Direction.LEFT:
                     animator.SetTrigger("RuningLeft");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 90);
                     break;
                 case Direction.DIAGONAL_DOWN_RIGHT:
                 case Direction.DIAGONAL_UP_RIGHT:
                 case Direction.RIGHT:
                     animator.SetTrigger("RuningRight");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, -90);
                     break;
                 default:
                     animator.SetTrigger("Static");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
             }
         }
@@ -311,28 +321,35 @@ public class CharacterMovement : MonoBehaviour
 
                 case Direction.NONE:
                     animator.SetTrigger("Static");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
                 case Direction.UP:
                     animator.SetTrigger("Up");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 0);
                     break;
                 case Direction.DOWN:
                     animator.SetTrigger("Down");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
                 case Direction.DIAGONAL_UP_LEFT:
                 case Direction.DIAGONAL_DOWN_LEFT:
                 case Direction.LEFT:
                     animator.SetTrigger("Left");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 90);
                     break;
                 case Direction.DIAGONAL_DOWN_RIGHT:
                 case Direction.DIAGONAL_UP_RIGHT:
                 case Direction.RIGHT:
                     animator.SetTrigger("Right");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, -90);
                     break;
                 default:
                     animator.SetTrigger("Static");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
             }
         }
     }
+
 
 }

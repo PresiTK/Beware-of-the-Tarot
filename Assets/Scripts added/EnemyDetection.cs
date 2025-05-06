@@ -7,6 +7,7 @@ public class EnemyDetection : MonoBehaviour
     public bool vision = false;
     public int speed = 20;
     public GameObject player;
+    public GameObject face_light;
     public CircleCollider2D trigger;
     public float detectionRange = 5f;
     public Animator animator;
@@ -26,6 +27,7 @@ public class EnemyDetection : MonoBehaviour
         {
             player = collision.gameObject;
             vision = true;
+            face_light.SetActive(true);
         }
     }
     void OnTriggerExit2D(Collider2D collision)
@@ -34,6 +36,7 @@ public class EnemyDetection : MonoBehaviour
         {
             vision = false;
             animator.SetTrigger("Walk");
+            face_light.SetActive(false);
         }
     }
     public void FollowPlayer(Transform enemytransform)

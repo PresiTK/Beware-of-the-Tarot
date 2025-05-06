@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7930185316926030931}
   - component: {fileID: 8116154051862502227}
   m_Layer: 0
-  m_Name: Mueble1
+  m_Name: Normal Deco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

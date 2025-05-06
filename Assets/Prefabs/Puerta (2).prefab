@@ -144,4 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherDoor: {fileID: 0}
-  doorOffset: {x: 0, y: 1}
+  doorOffset: {x: -1, y: 0}
