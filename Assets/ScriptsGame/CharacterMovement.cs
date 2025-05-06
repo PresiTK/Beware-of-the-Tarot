@@ -7,6 +7,7 @@ using UnityEngine.Rendering.Universal;
 public enum Direction { NONE, UP, DOWN, LEFT, RIGHT , DIAGONAL_UP_RIGHT, DIAGONAL_UP_LEFT, DIAGONAL_DOWN_RIGHT, DIAGONAL_DOWN_LEFT };
 public class CharacterMovement : MonoBehaviour
 {
+    AudioSource audioSource;
     public float speedX = 1;
     public float speedY = 1;
     public bool light_flash=false;
@@ -36,6 +37,7 @@ public class CharacterMovement : MonoBehaviour
     {
         light_flash = false;
         rb2d = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         sprRender = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         flashlight.SetActive(light_flash);
@@ -143,6 +145,18 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             rb2d.velocity = new Vector2(movement.x * speedX * Time.fixedDeltaTime, movement.y * speedY * Time.fixedDeltaTime);
+
+            if (rb2d.velocity.x != 0)
+            {
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
+            }
+            else
+            {
+                audioSource.Stop();
+            }
         }
     }
     private void UpdateDirection()
