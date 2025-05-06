@@ -14,7 +14,8 @@ public class CharacterMovement : MonoBehaviour
     private bool isRunning= false;
 
     Rigidbody2D rb2d;
-    SpriteRenderer sprRender;
+    public SpriteRenderer sprRender;
+    public Renderer Renderer;
 
     public GameObject flashlight;
     public Pause pause;
@@ -38,6 +39,7 @@ public class CharacterMovement : MonoBehaviour
         sprRender = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         flashlight.SetActive(light_flash);
+        Renderer = GetComponent<Renderer>();
 
     }
 
@@ -75,9 +77,10 @@ public class CharacterMovement : MonoBehaviour
     {
         InputController.OnInteract -= TogglePressingHide;
     }
-    private void TogglePressingHide()
+    public void TogglePressingHide()
     {
-        pressingHide = !pressingHide;
+        Renderer.enabled = pressingHide;
+
     }
 
     private void FixedUpdate()
@@ -212,7 +215,7 @@ public class CharacterMovement : MonoBehaviour
                 direction = Direction.RIGHT;
             }
         }
-        if (isSearching)
+        if (isSearching || isHiding)
         {
             direction = Direction.NONE;
         }
