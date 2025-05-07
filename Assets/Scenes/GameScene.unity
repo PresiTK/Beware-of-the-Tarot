@@ -8602,11 +8602,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 80210677650788324, guid: ec3f7528a645a12478dd2ffafd86b1d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.5
+      value: -35.99
       objectReference: {fileID: 0}
     - target: {fileID: 80210677650788324, guid: ec3f7528a645a12478dd2ffafd86b1d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.6
+      value: -23.07
       objectReference: {fileID: 0}
     - target: {fileID: 80210677650788324, guid: ec3f7528a645a12478dd2ffafd86b1d3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8639,6 +8639,14 @@ PrefabInstance:
     - target: {fileID: 80210677650788324, guid: ec3f7528a645a12478dd2ffafd86b1d3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778841977666437965, guid: ec3f7528a645a12478dd2ffafd86b1d3, type: 3}
+      propertyPath: m_Size.y
+      value: 0.14151941
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778841977666437965, guid: ec3f7528a645a12478dd2ffafd86b1d3, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.060322203
       objectReference: {fileID: 0}
     - target: {fileID: 3340420559013361313, guid: ec3f7528a645a12478dd2ffafd86b1d3, type: 3}
       propertyPath: face_light
@@ -12000,13 +12008,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1811049683902710342, guid: 796b96240c275cf448902d4d74a8b1fe, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 2316577793126288726, guid: 796b96240c275cf448902d4d74a8b1fe, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316577793126288726, guid: 796b96240c275cf448902d4d74a8b1fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3322680916283531298, guid: 796b96240c275cf448902d4d74a8b1fe, type: 3}
       propertyPath: hide

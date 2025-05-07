@@ -71,19 +71,19 @@ public class CharacterMovement : MonoBehaviour
   
 
     }
-    private void OnEnable()
-    {
-        InputController.OnInteract += TogglePressingHide;
-    }
-    private void OnDisable()
-    {
-        InputController.OnInteract -= TogglePressingHide;
-    }
-    public void TogglePressingHide()
-    {
-        Renderer.enabled = pressingHide;
+    //private void OnEnable()
+    //{
+    //    InputController.OnInteract += TogglePressingHide;
+    //}
+    //private void OnDisable()
+    //{
+    //    InputController.OnInteract -= TogglePressingHide;
+    //}
+    //public void TogglePressingHide()
+    //{
+    //    Renderer.enabled = pressingHide;
 
-    }
+    //}
 
     private void FixedUpdate()
     {
@@ -229,8 +229,13 @@ public class CharacterMovement : MonoBehaviour
                 direction = Direction.RIGHT;
             }
         }
-        if (isSearching || isHiding)
+        if (isSearching)
         {
+            direction = Direction.NONE;
+        }
+        if (isHiding)
+        {
+            Renderer.enabled = isHiding;
             direction = Direction.NONE;
         }
     }

@@ -17,7 +17,7 @@ public class Hiding : MonoBehaviour
         if (hide && Input.GetKeyDown(KeyCode.E)) 
         { 
             TeleportPlayer();
-            state.TogglePressingHide();
+            //state.TogglePressingHide();
             state.isHiding = !state.isHiding;
         }
     }
