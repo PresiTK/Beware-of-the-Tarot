@@ -8,6 +8,8 @@ public class Interaction : MonoBehaviour
 {
     public static event Action OnWin;
     public static event Action<bool> OnCardNotFound;
+    public static event Action<bool> OnCardFound;
+
 
     [SerializeField] private GameObject image;
 
@@ -38,7 +40,7 @@ public class Interaction : MonoBehaviour
                     }
                     else
                     {
-                        OnWin?.Invoke();
+                        CardFound();
                     }
                 }   
             }
@@ -52,6 +54,14 @@ public class Interaction : MonoBehaviour
             }
         }
     }
+    private void CardFound()
+    {
+        OnCardFound?.Invoke(true);
+        textActive = true;
+        currentTime = deactivateTime;
+        player.isSearching = true;
+
+    }
     private void DisplayText()
     {
         OnCardNotFound?.Invoke(true);
@@ -64,6 +74,8 @@ public class Interaction : MonoBehaviour
         player.isSearching = false;
         textActive = false;
         OnCardNotFound?.Invoke(false);
+        OnCardFound?.Invoke(false);
+
         player.isSearching = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)

@@ -11,6 +11,8 @@ public class TeclaFable : MonoBehaviour
     private void Start()
     {
         Tecla = GetComponent<Renderer>();
+        Tecla.enabled = false;
+        text.enabled = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
