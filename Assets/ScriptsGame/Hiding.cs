@@ -6,6 +6,7 @@ using UnityEngine;
 public class Hiding : MonoBehaviour
 {
     private GameObject player;
+    public CharacterHide characterHide;
     [SerializeField] private GameObject image;
 
 
@@ -13,10 +14,17 @@ public class Hiding : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && hide && player.TryGetComponent<CharacterHide>(out CharacterHide characterHide))
+
+        if (Input.GetKeyDown(KeyCode.E)&&!hide)
+        {
+            characterHide.UnHide();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && hide)
         {
             characterHide.Hide();
         }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -23,16 +23,21 @@ public class available_ilumination : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        light2D.SetActive(true);
-        currentTime = timeToWait;
-        isTrigger = true;
-
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            light2D.SetActive(true);
+            currentTime = timeToWait;
+            isTrigger = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        light2D.SetActive(false);
-        isTrigger = false;
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            light2D.SetActive(false);
+            isTrigger = false;
+        }
     }
     private void timerlight()
     {

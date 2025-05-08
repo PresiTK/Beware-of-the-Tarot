@@ -141,18 +141,6 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             rb2d.velocity = new Vector2(movement.x * speedX * Time.fixedDeltaTime, movement.y * speedY * Time.fixedDeltaTime);
-
-            if (rb2d.velocity.x != 0)
-            {
-                if (!audioSource.isPlaying)
-                {
-                    audioSource.Play();
-                }
-            }
-            else
-            {
-                audioSource.Stop();
-            }
         }
     }
     private void UpdateDirection()
@@ -233,20 +221,20 @@ public class CharacterMovement : MonoBehaviour
         {
             direction = Direction.NONE;
         }
+        if(direction != Direction.NONE)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            audioSource.Stop();
+        }
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Hiding")&& pressingHide)
-        {
-            pressingHide = false;
-        }
-        if (collision.gameObject.tag.Equals("Enemy"))
-        {
-            Debug.Log("Te mueres");
-        }
-    }
     private void PlayAnimation()
     {
         if (isRunning)

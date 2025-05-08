@@ -8,13 +8,7 @@ public class CharacterHide : MonoBehaviour
     public float characterYpos;
     public float tpYpos = 20000;
 
-    private void Update()
-    {
-        if (hided && Input.GetKeyDown(KeyCode.E))
-        {
-            UnHide();
-        }
-    }
+
     public void Hide()
     {
         characterYpos = transform.position.y;
@@ -24,10 +18,9 @@ public class CharacterHide : MonoBehaviour
         {
             characterMovement.isHiding = true;
             characterMovement.rb2d.velocity=Vector2.zero;
-
         }
     }
-    private void UnHide()
+    public void UnHide()
     {
         transform.position = new Vector2(transform.position.x, characterYpos);
         hided = false;

@@ -82,6 +82,7 @@ public class Interaction : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
+            HideText();
             image.SetActive(true);
             mensaje = true;
             Debug.Log("Deberia mensaje estar a true");
