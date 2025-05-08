@@ -18,6 +18,7 @@ public class Interaction : MonoBehaviour
     private bool textActive;
     private bool mensaje;
     public bool winCondition;
+
     public CharacterMovement player;
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,7 @@ public class Interaction : MonoBehaviour
                     else
                     {
                         CardFound();
+                        player.WinIsActive = true;
                     }
                 }   
             }

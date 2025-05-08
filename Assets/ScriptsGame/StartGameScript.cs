@@ -10,7 +10,13 @@ public class StartGameScript : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            SceneManager.LoadScene("GameScene");
+            if(collision.gameObject.TryGetComponent<CharacterMovement>(out CharacterMovement player))
+            {
+                if (player.WinIsActive)
+                {
+                    SceneManager.LoadScene("GameScene");
+                }
+            }
         }
     }
 }

@@ -30,6 +30,7 @@ public class CharacterMovement : MonoBehaviour
     public bool pressingHide = false;
     private Animator animator;
     private Vector2 vector2;
+    public bool WinIsActive = false;
     // Start is called before the first frame update
 
     void Start()

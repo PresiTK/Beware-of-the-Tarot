@@ -8,6 +8,7 @@ public class Hiding : MonoBehaviour
     private GameObject player;
     public CharacterHide characterHide;
     [SerializeField] private GameObject image;
+    private bool hidedwasPressed = false;
 
 
     private bool hide = false;
@@ -15,14 +16,17 @@ public class Hiding : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E)&&!hide)
-        {
-            characterHide.UnHide();
-        }
+ 
 
         if (Input.GetKeyDown(KeyCode.E) && hide)
         {
             characterHide.Hide();
+            hidedwasPressed = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && !hide&& hidedwasPressed)
+        {
+            characterHide.UnHide();
+            hidedwasPressed = false;
         }
 
     }
