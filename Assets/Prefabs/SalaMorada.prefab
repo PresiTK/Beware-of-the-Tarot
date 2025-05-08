@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 8934964269408022724}
   - component: {fileID: 323684936692222739}
   m_Layer: 0
-  m_Name: SalaFinal
+  m_Name: SalaMorada
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
