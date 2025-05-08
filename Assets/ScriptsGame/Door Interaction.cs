@@ -18,7 +18,7 @@ public class DoorInteraction : MonoBehaviour
         if (enter && Input.GetKeyDown(KeyCode.E))
         {
             Teleport();
-            cameraMovement.TeleportToRoom(new Vector2(0, transform.position.y));
+            cameraMovement.TeleportToRoom(new Vector2(transform.position.x, transform.position.y));
             cameraMovement.isInRoom = true;
         }
     }

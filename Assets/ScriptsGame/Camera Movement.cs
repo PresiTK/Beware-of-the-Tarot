@@ -41,9 +41,8 @@ public class CameraMovement : MonoBehaviour
             target.transform.position.x,
             roomPosition.y
         );
-        transform.position = roomPosition;
+        transform.position = newPosition;
         lastTargetPosition = newPosition;
-
         isInRoom = false;
     }
 
@@ -60,6 +59,7 @@ public class CameraMovement : MonoBehaviour
                             roomPositionY.positionX, 
                             roomPositionY.positionY
                             )
+                       
                         );
                 }
             }

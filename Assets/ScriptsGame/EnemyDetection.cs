@@ -19,6 +19,8 @@ public class EnemyDetection : MonoBehaviour
     {
         trigger = GetComponent<CircleCollider2D>();
         trigger.radius = detectionRange;
+        face_light.SetActive(false);
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)

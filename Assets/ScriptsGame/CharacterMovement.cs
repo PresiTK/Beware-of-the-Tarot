@@ -14,9 +14,8 @@ public class CharacterMovement : MonoBehaviour
     public float runingMultyply = 2f;
     private bool isRunning= false;
 
-    Rigidbody2D rb2d;
+    public Rigidbody2D rb2d;
     public SpriteRenderer sprRender;
-    public Renderer Renderer;
 
     public GameObject flashlight;
     public Pause pause;
@@ -41,16 +40,17 @@ public class CharacterMovement : MonoBehaviour
         sprRender = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         flashlight.SetActive(light_flash);
-        Renderer = GetComponent<Renderer>();
 
     }
-
+    private void FixedUpdate()
+    {
+        moving();
+    }
     // Update is called once per frame
     void Update()
     {
         UpdateDirection();
         PlayAnimation();
-        Shoot();
 
     
         if (Input.GetKeyDown(KeyCode.F))
@@ -85,17 +85,13 @@ public class CharacterMovement : MonoBehaviour
 
     //}
 
-    private void FixedUpdate()
-    {
-        moving();
 
-    }
 
     private void moving()
     {
         //Siempre comprobar si los componentes existen antes de usarlos
         if (rb2d == null) { return; } //Si no existe me piro y no hago nada, me ahorro c�lculos
-
+        if (isHiding) { return; }
         //Separamos l�gica de f�sica
         float hInput = 0;
         float vInput = 0;
@@ -235,26 +231,10 @@ public class CharacterMovement : MonoBehaviour
         }
         if (isHiding)
         {
-            Renderer.enabled = isHiding;
             direction = Direction.NONE;
         }
     }
 
-    private void Shoot(){   
-        if (Input.GetKeyDown(KeyCode.Space)){
-            currShootTime = 0;
-            Debug.Log("START SHOOTING");
-        }else if (Input.GetKey(KeyCode.Space)){
-            currShootTime += Time.deltaTime;
-            if (currShootTime > shootCadenceTime)
-            {
-                currShootTime = 0;
-                Debug.Log("CONTINUOUS SHOOTING");
-            }
-        }else{
-            currShootTime = 0;
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -265,38 +245,6 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.tag.Equals("Enemy"))
         {
             Debug.Log("Te mueres");
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Hiding"))
-        {
-            HideInPlace(false);
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Hiding"))
-        {
-            HideInPlace(pressingHide);
-        }
-        if (collision.gameObject.tag.Equals("win"))
-        {
-            HideInPlace(pressingHide);
-        }
-
-    }
-
-    private void HideInPlace(bool hide)
-    {
-        isHiding = hide;
-        if (sprRender != null)
-        {
-            Color col = sprRender.color;
-            col.a = isHiding ? 0f : 1f; 
-            sprRender.color = col;
         }
     }
     private void PlayAnimation()

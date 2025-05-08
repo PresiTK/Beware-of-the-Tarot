@@ -5,26 +5,24 @@ using UnityEngine;
 
 public class Hiding : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     [SerializeField] private GameObject image;
-    public CharacterMovement state;
 
 
     private bool hide = false;
 
     private void Update()
     {
-        if (hide && Input.GetKeyDown(KeyCode.E)) 
-        { 
-            TeleportPlayer();
-            //state.TogglePressingHide();
-            state.isHiding = !state.isHiding;
+        if (Input.GetKeyDown(KeyCode.E) && hide && player.TryGetComponent<CharacterHide>(out CharacterHide characterHide))
+        {
+            characterHide.Hide();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
+            player = collision.gameObject;
             image.SetActive(true);
             hide = true;
         }
@@ -32,16 +30,13 @@ public class Hiding : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        hide = false;
-        image.SetActive(false);
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            player = null;
+            hide = false;
+            image.SetActive(false);
+        }
     }
 
-    public Vector2 TeleportPlayer()
-    {
-        if (player != null) 
-        {
-            player.transform.position = transform.position; 
-        }
-        return player.transform.position;
-    }
+
 }
