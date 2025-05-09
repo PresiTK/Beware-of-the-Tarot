@@ -1,3 +1,4 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,8 +12,11 @@ public class CharacterMovement : MonoBehaviour
     public float speedX = 1;
     public float speedY = 1;
     public bool light_flash=false;
-    public float runingMultyply = 2f;
+    public float runingMultyply = 1.5f;
     private bool isRunning= false;
+    public GameObject tarotSprite;
+    public GameObject newTarotSprite;
+    private float Stamina=2f;
 
     public Rigidbody2D rb2d;
     public SpriteRenderer sprRender;
@@ -21,8 +25,6 @@ public class CharacterMovement : MonoBehaviour
     public Pause pause;
     public Direction direction = Direction.NONE;
 
-    public float currShootTime = 0;
-    public float shootCadenceTime = 2.0f;
 
     public bool isHiding = false;
     public bool isSearching = false;
@@ -31,10 +33,11 @@ public class CharacterMovement : MonoBehaviour
     private Animator animator;
     private Vector2 vector2;
     public bool WinIsActive = false;
-    // Start is called before the first frame update
 
     void Start()
     {
+        tarotSprite.SetActive(true);
+        newTarotSprite.SetActive(false);
         light_flash = false;
         rb2d = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
@@ -45,11 +48,15 @@ public class CharacterMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        moving();
+        Moving();
     }
-    // Update is called once per frame
     void Update()
     {
+        if (WinIsActive)
+        {
+            tarotSprite.SetActive(false);
+            newTarotSprite.SetActive(true);
+        }
         UpdateDirection();
         PlayAnimation();
 
@@ -67,9 +74,29 @@ public class CharacterMovement : MonoBehaviour
         //{
         //    pause.Resume();
         //}
+        if (Stamina < 0f)
+        {
+            Stamina = 0f;
+            isRunning = false;
+        }
+        else if (Input.GetKey(KeyCode.LeftShift) &&  Stamina>0f)
+        {
+            
+            isRunning = true;
+            Stamina -= Time.deltaTime;
+        }
+        else if(direction == Direction.NONE )
+        {
+            isRunning = false;
 
-        isRunning = Input.GetKey(KeyCode.LeftShift);
-  
+            // Regenera stamina si el jugador no corre
+            if (Stamina < 2f)
+            {
+                Stamina += Time.deltaTime;
+                Stamina = Mathf.Min(Stamina, 1.5f); // Límite superior
+            }
+        }
+        Debug.Log("Stamina: " + Stamina);
 
     }
     //private void OnEnable()
@@ -88,12 +115,11 @@ public class CharacterMovement : MonoBehaviour
 
 
 
-    private void moving()
+    private void Moving()
     {
-        //Siempre comprobar si los componentes existen antes de usarlos
-        if (rb2d == null) { return; } //Si no existe me piro y no hago nada, me ahorro cï¿½lculos
+        if (rb2d == null) { return; } 
         if (isHiding) { return; }
-        //Separamos lï¿½gica de fï¿½sica
+
         float hInput = 0;
         float vInput = 0;
 
@@ -146,7 +172,6 @@ public class CharacterMovement : MonoBehaviour
     }
     private void UpdateDirection()
     {
-        //Separamos lï¿½gica de fï¿½sica
         direction = Direction.NONE;
         if(isHiding) { return; }
 
@@ -240,6 +265,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (isRunning)
         {
+
             switch (direction)
             {
 
