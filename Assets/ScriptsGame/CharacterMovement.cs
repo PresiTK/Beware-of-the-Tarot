@@ -273,7 +273,6 @@ public class CharacterMovement : MonoBehaviour
         {
             audioSource.Stop();
         }
-        lastDirection = direction;
 
     }
 
@@ -288,37 +287,37 @@ public class CharacterMovement : MonoBehaviour
 
                 case Direction.NONE_DOWN:
                     animator.SetTrigger("Static");
-                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
                 case Direction.NONE_UP:
                     animator.SetTrigger("Static_Up");
-                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
                 case Direction.NONE_LEFT:
                     animator.SetTrigger("Static_Left");
-                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
                 case Direction.NONE_RIGHT:
                     animator.SetTrigger("Static_Right");
-                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
                 case Direction.UP:
+                    lastDirection = Direction.UP;
                     animator.SetTrigger("RuningUp");
                     flashlight.transform.rotation = Quaternion.Euler(0, 0, 0);
                     break;
                 case Direction.DOWN:
+                    lastDirection = Direction.DOWN;
                     animator.SetTrigger("RuningDown");
                     flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
                 case Direction.DIAGONAL_UP_LEFT:
                 case Direction.DIAGONAL_DOWN_LEFT:
                 case Direction.LEFT:
+                    lastDirection = Direction.LEFT;
                     animator.SetTrigger("RuningLeft");
                     flashlight.transform.rotation = Quaternion.Euler(0, 0, 90);
                     break;
                 case Direction.DIAGONAL_DOWN_RIGHT:
                 case Direction.DIAGONAL_UP_RIGHT:
                 case Direction.RIGHT:
+                    lastDirection = Direction.RIGHT;
                     animator.SetTrigger("RuningRight");
                     flashlight.transform.rotation = Quaternion.Euler(0, 0, -90);
                     break;
@@ -335,25 +334,37 @@ public class CharacterMovement : MonoBehaviour
 
                 case Direction.NONE_DOWN:
                     animator.SetTrigger("Static");
-                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
+                    break;
+                case Direction.NONE_UP:
+                    animator.SetTrigger("Static_Up");
+                    break;
+                case Direction.NONE_LEFT:
+                    animator.SetTrigger("Static_Left");
+                    break;
+                case Direction.NONE_RIGHT:
+                    animator.SetTrigger("Static_Right");
                     break;
                 case Direction.UP:
+                    lastDirection = Direction.UP;
                     animator.SetTrigger("Up");
                     flashlight.transform.rotation = Quaternion.Euler(0, 0, 0);
                     break;
                 case Direction.DOWN:
+                    lastDirection = Direction.DOWN;
                     animator.SetTrigger("Down");
                     flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
                 case Direction.DIAGONAL_UP_LEFT:
                 case Direction.DIAGONAL_DOWN_LEFT:
                 case Direction.LEFT:
+                    lastDirection = Direction.LEFT;
                     animator.SetTrigger("Left");
                     flashlight.transform.rotation = Quaternion.Euler(0, 0, 90);
                     break;
                 case Direction.DIAGONAL_DOWN_RIGHT:
                 case Direction.DIAGONAL_UP_RIGHT:
                 case Direction.RIGHT:
+                    lastDirection = Direction.RIGHT;
                     animator.SetTrigger("Right");
                     flashlight.transform.rotation = Quaternion.Euler(0, 0, -90);
                     break;
