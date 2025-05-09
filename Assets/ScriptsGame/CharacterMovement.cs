@@ -273,6 +273,8 @@ public class CharacterMovement : MonoBehaviour
         {
             audioSource.Stop();
         }
+        lastDirection = direction;
+
     }
 
 
@@ -286,6 +288,18 @@ public class CharacterMovement : MonoBehaviour
 
                 case Direction.NONE_DOWN:
                     animator.SetTrigger("Static");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
+                    break;
+                case Direction.NONE_UP:
+                    animator.SetTrigger("Static_Up");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
+                    break;
+                case Direction.NONE_LEFT:
+                    animator.SetTrigger("Static_Left");
+                    flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
+                    break;
+                case Direction.NONE_RIGHT:
+                    animator.SetTrigger("Static_Right");
                     flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
                 case Direction.UP:
