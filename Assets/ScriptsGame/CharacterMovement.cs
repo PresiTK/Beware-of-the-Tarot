@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public enum Direction { NONE, UP, DOWN, LEFT, RIGHT , DIAGONAL_UP_RIGHT, DIAGONAL_UP_LEFT, DIAGONAL_DOWN_RIGHT, DIAGONAL_DOWN_LEFT };
+public enum Direction { NONE_DOWN,NONE_UP,NONE_LEFT,NONE_RIGHT, UP, DOWN, LEFT, RIGHT , DIAGONAL_UP_RIGHT, DIAGONAL_UP_LEFT, DIAGONAL_DOWN_RIGHT, DIAGONAL_DOWN_LEFT };
 public class CharacterMovement : MonoBehaviour
 {
     AudioSource audioSource;
@@ -23,8 +23,8 @@ public class CharacterMovement : MonoBehaviour
 
     public GameObject flashlight;
     public Pause pause;
-    public Direction direction = Direction.NONE;
-
+    public Direction direction = Direction.NONE_DOWN;
+    private Direction lastDirection=Direction.NONE_DOWN;
 
     public bool isHiding = false;
     public bool isSearching = false;
@@ -85,7 +85,7 @@ public class CharacterMovement : MonoBehaviour
             isRunning = true;
             Stamina -= Time.deltaTime;
         }
-        else if(direction == Direction.NONE )
+        else if(direction == Direction.NONE_DOWN|| direction == Direction.NONE_UP || direction == Direction.NONE_RIGHT|| direction == Direction.NONE_LEFT)
         {
             isRunning = false;
 
@@ -172,7 +172,7 @@ public class CharacterMovement : MonoBehaviour
     }
     private void UpdateDirection()
     {
-        direction = Direction.NONE;
+        direction = Direction.NONE_DOWN;
         if(isHiding) { return; }
 
         int horizontal = 0;
@@ -192,7 +192,22 @@ public class CharacterMovement : MonoBehaviour
         }
         if (vertical == 0 && horizontal == 0)
         {
-            direction =Direction.NONE;
+            if (lastDirection == Direction.DOWN)
+            {
+                direction = Direction.NONE_DOWN;
+            }
+            else if (lastDirection == Direction.UP) {
+                direction = Direction.NONE_UP;
+            }
+            else if (lastDirection == Direction.RIGHT||lastDirection==Direction.DIAGONAL_UP_RIGHT||lastDirection==Direction.DIAGONAL_DOWN_RIGHT)
+            {
+                direction = Direction.NONE_RIGHT;
+            }
+            else if (lastDirection == Direction.LEFT||lastDirection==Direction.DIAGONAL_DOWN_LEFT||lastDirection==Direction.DIAGONAL_UP_LEFT)
+            {
+                direction = Direction.NONE_LEFT;
+            }
+
         }
         if (vertical == horizontal)
         {
@@ -241,13 +256,13 @@ public class CharacterMovement : MonoBehaviour
         }
         if (isSearching)
         {
-            direction = Direction.NONE;
+            direction = Direction.NONE_DOWN;
         }
         if (isHiding)
         {
-            direction = Direction.NONE;
+            direction = Direction.NONE_DOWN;
         }
-        if(direction != Direction.NONE)
+        if(direction != Direction.NONE_DOWN)
         {
             if (!audioSource.isPlaying)
             {
@@ -269,7 +284,7 @@ public class CharacterMovement : MonoBehaviour
             switch (direction)
             {
 
-                case Direction.NONE:
+                case Direction.NONE_DOWN:
                     animator.SetTrigger("Static");
                     flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
@@ -304,7 +319,7 @@ public class CharacterMovement : MonoBehaviour
             switch (direction)
             {
 
-                case Direction.NONE:
+                case Direction.NONE_DOWN:
                     animator.SetTrigger("Static");
                     flashlight.transform.rotation = Quaternion.Euler(0, 0, 180);
                     break;
