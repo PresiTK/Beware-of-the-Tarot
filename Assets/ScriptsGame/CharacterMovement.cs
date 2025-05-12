@@ -8,7 +8,7 @@ using UnityEngine.Rendering.Universal;
 public enum Direction { NONE_DOWN,NONE_UP,NONE_LEFT,NONE_RIGHT, UP, DOWN, LEFT, RIGHT , DIAGONAL_UP_RIGHT, DIAGONAL_UP_LEFT, DIAGONAL_DOWN_RIGHT, DIAGONAL_DOWN_LEFT };
 public class CharacterMovement : MonoBehaviour
 {
-    AudioSource audioSource;
+    public PlayerAudio audio;
     public float speedX = 1;
     public float speedY = 1;
     public bool light_flash=false;
@@ -40,7 +40,6 @@ public class CharacterMovement : MonoBehaviour
         newTarotSprite.SetActive(false);
         light_flash = false;
         rb2d = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>();
         sprRender = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         flashlight.SetActive(light_flash);
@@ -254,6 +253,7 @@ public class CharacterMovement : MonoBehaviour
                 direction = Direction.RIGHT;
             }
         }
+
         if (isSearching)
         {
             direction = Direction.NONE_DOWN;
@@ -264,14 +264,15 @@ public class CharacterMovement : MonoBehaviour
         }
         if(direction != Direction.NONE_DOWN)
         {
-            if (!audioSource.isPlaying)
+            if (!audio.steps.isPlaying)
             {
-                audioSource.Play();
+                audio.StepsOn();
             }
+            
         }
         else
         {
-            audioSource.Stop();
+            audio.StepsOff();
         }
 
     }
@@ -281,7 +282,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (isRunning)
         {
-
+            audio.RunOn();
             switch (direction)
             {
 
@@ -329,6 +330,7 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
+            audio.RunOff();
             switch (direction)
             {
 
