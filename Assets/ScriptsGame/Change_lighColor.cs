@@ -14,8 +14,12 @@ public class Change_lighColor : MonoBehaviour
     private bool range=false;
     private float speed =5;
     private bool goAway = false;
+    private Vector2 initialpos = Vector2.zero;
+    [SerializeField] GameObject restart;
+    public CameraMovement tpcam;
     private void Start()
     {
+        initialpos = transform.position;
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -54,7 +58,11 @@ public class Change_lighColor : MonoBehaviour
             }
         }
         if (transform.position == player.transform.position){
-
+            transform.position=initialpos;
+            player.transform.position = restart.transform.position;
+            goAway = false;
+            range = false;
+            tpcam.RecallCam();
         }
 
     }
