@@ -6,7 +6,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private EnemyAudio audio;
     public GameObject player;
     public EnemyDetection detection;
     public GameOverScreen gameOverScreen;
@@ -28,8 +27,6 @@ public class EnemyMovement : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
-        audio = GetComponent<EnemyAudio>();
-
     }
 
     // Update is called once per frame
@@ -40,7 +37,6 @@ public class EnemyMovement : MonoBehaviour
 
     void MovementTowardsPlayer()
     {
-        audio.Steps();
         if (detection.vision == false)
         {
 
@@ -49,29 +45,15 @@ public class EnemyMovement : MonoBehaviour
         {
             animator.SetTrigger("Run");
             detection.FollowPlayer(transform);
-            if (!audio.enemySteps.isPlaying) {
-                audio.Run();
-
-            }
         }
         else
         {
             patrol.FollowPath();
-            if (!audio.enemySteps.isPlaying) {
-
-                audio.Walk();
-            }
         }
         if(enter)
         {
             Teleport();
             patrol.FollowPath();
-        }
-        if (!detection.vision) {
-            if (audio.enemySteps.isPlaying)
-            {
-                audio.StepsOff();
-            }
         }
     }
 
