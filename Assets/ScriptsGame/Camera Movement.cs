@@ -45,10 +45,6 @@ public class CameraMovement : MonoBehaviour
         lastTargetPosition = newPosition;
         isInRoom = false;
     }
-    public void RecallCam()
-    {
-        isInRoom = true;
-    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {

@@ -82,6 +82,7 @@ public class CharacterMovement : MonoBehaviour
         {
             
             isRunning = true;
+            Stamina -= Time.deltaTime;
         }
         else if(direction == Direction.NONE_DOWN|| direction == Direction.NONE_UP || direction == Direction.NONE_RIGHT|| direction == Direction.NONE_LEFT)
         {
@@ -93,10 +94,6 @@ public class CharacterMovement : MonoBehaviour
                 Stamina += Time.deltaTime;
                 Stamina = Mathf.Min(Stamina, 1.5f); // Límite superior
             }
-        }
-        if (isRunning)
-        {
-            Stamina -= Time.deltaTime;
         }
         Debug.Log("Stamina: " + Stamina);
 
@@ -265,7 +262,7 @@ public class CharacterMovement : MonoBehaviour
         {
             direction = Direction.NONE_DOWN;
         }
-        if(direction != Direction.NONE_DOWN||direction!=Direction.NONE_UP||direction!=Direction.NONE_LEFT||direction!=Direction.NONE_RIGHT)
+        if(direction != Direction.NONE_DOWN)
         {
             if (!audio.steps.isPlaying)
             {
