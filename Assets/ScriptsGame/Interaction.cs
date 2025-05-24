@@ -13,17 +13,19 @@ public class Interaction : MonoBehaviour
 
     [SerializeField] private GameObject image;
 
-    [SerializeField] private float deactivateTime = 2.0f;
+    [SerializeField] private float deactivateTime = 4.0f;
     [SerializeField] private float currentTime = 0;
     private bool textActive;
     private bool mensaje;
     public bool winCondition;
-
+    private AudioSource audioSource;
     public CharacterMovement player;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();  
         textActive = false;
+        audioSource.Stop();
     }
 
     // Update is called once per frame
@@ -37,6 +39,7 @@ public class Interaction : MonoBehaviour
                 {
                     if (!winCondition)
                     {
+                        audioSource.Play();
                         DisplayText();
                     }
                     else

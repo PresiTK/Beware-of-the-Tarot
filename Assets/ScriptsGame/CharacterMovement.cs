@@ -8,7 +8,7 @@ using UnityEngine.Rendering.Universal;
 public enum Direction { NONE_DOWN,NONE_UP,NONE_LEFT,NONE_RIGHT, UP, DOWN, LEFT, RIGHT , DIAGONAL_UP_RIGHT, DIAGONAL_UP_LEFT, DIAGONAL_DOWN_RIGHT, DIAGONAL_DOWN_LEFT };
 public class CharacterMovement : MonoBehaviour
 {
-    AudioSource audioSource;
+    
     public float speedX = 1;
     public float speedY = 1;
     public bool light_flash=false;
@@ -28,6 +28,7 @@ public class CharacterMovement : MonoBehaviour
 
     public bool isHiding = false;
     public bool isSearching = false;
+    private PlayerAudio playerAudio;
 
     public bool pressingHide = false;
     private Animator animator;
@@ -40,11 +41,12 @@ public class CharacterMovement : MonoBehaviour
         newTarotSprite.SetActive(false);
         light_flash = false;
         rb2d = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>();
         sprRender = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         flashlight.SetActive(light_flash);
-
+        playerAudio = GetComponent<PlayerAudio>();
+        playerAudio.flashlifht.Stop();
+        playerAudio.LightNo();
     }
     private void FixedUpdate()
     {
@@ -63,8 +65,17 @@ public class CharacterMovement : MonoBehaviour
     
         if (Input.GetKeyDown(KeyCode.F))
         {
+            playerAudio.FlashlightOn();
             light_flash = !light_flash;
             flashlight.SetActive(light_flash);
+            if (light_flash)
+            {
+                playerAudio.LightActive();
+            }
+            else
+            {
+                playerAudio.LightNo();
+            }
         }
         if (Input.GetKeyDown(KeyCode.F1))
         {
@@ -96,6 +107,7 @@ public class CharacterMovement : MonoBehaviour
                 Stamina = Mathf.Min(Stamina, 1.5f); // Límite superior
             }
         }
+
         Debug.Log("Stamina: " + Stamina);
 
     }
@@ -262,16 +274,16 @@ public class CharacterMovement : MonoBehaviour
         {
             direction = Direction.NONE_DOWN;
         }
-        if(direction != Direction.NONE_DOWN)
+        if(direction != Direction.NONE_DOWN && direction != Direction.NONE_UP && direction != Direction.NONE_LEFT && direction != Direction.NONE_RIGHT)
         {
-            if (!audioSource.isPlaying)
+            if (!playerAudio.steps.isPlaying)
             {
-                audioSource.Play();
+                playerAudio.StepsOn();
             }
         }
         else
         {
-            audioSource.Stop();
+            playerAudio.StepsOff();
         }
 
     }

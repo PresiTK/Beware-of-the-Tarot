@@ -15,6 +15,8 @@ public class EnemyMovement : MonoBehaviour
     public GameObject door;
     private Vector2 teleportPosition = Vector2.zero;
     private Animator animator;
+    private EnemyAudio audio;
+    private bool patrolling = true;
 
 
     void Start()
@@ -27,6 +29,9 @@ public class EnemyMovement : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
+        audio = GetComponent<EnemyAudio>();
+        audio.PatrolOff();
+        audio.ChaseOff();
     }
 
     // Update is called once per frame
@@ -37,17 +42,26 @@ public class EnemyMovement : MonoBehaviour
 
     void MovementTowardsPlayer()
     {
-        if (detection.vision == false)
-        {
 
-        }
         if (detection.vision && !hide.isHiding)
         {
+            if (patrolling)
+            {
+                audio.PatrolOff();
+                audio.ChaseOn();
+            }
+            patrolling = false;
             animator.SetTrigger("Run");
             detection.FollowPlayer(transform);
         }
         else
         {
+            if (!patrolling)
+            {
+                audio.ChaseOff();
+                audio.PatrolOn();
+            }
+            patrolling = true;
             patrol.FollowPath();
         }
         if(enter)

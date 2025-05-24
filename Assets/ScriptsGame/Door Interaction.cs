@@ -10,13 +10,20 @@ public class DoorInteraction : MonoBehaviour
     public CameraMovement cameraMovement;
     public EnemyDetection detection;
     public patrullar newpoint;
+    private PlayerAudio playerAudio;
 
 
     public Vector2 teleportPosition = Vector2.zero;
+    private void Start()
+    {
+        playerAudio = GetComponent<PlayerAudio>();
+        playerAudio.door.Stop();
+    }
     private void Update()
     {
         if (enter && Input.GetKeyDown(KeyCode.E))
         {
+            playerAudio.DoorOpen();
             Teleport();
             cameraMovement.TeleportToRoom(new Vector2(transform.position.x, transform.position.y));
             cameraMovement.isInRoom = true;
@@ -48,8 +55,8 @@ public class DoorInteraction : MonoBehaviour
 
     private void Teleport()
     {
-        if (door != null) 
-        {   
+        if (door != null)
+        {
             transform.position = teleportPosition;
             door = null;
             enter = false;
