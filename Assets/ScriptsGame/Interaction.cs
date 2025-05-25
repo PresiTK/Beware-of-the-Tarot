@@ -18,14 +18,15 @@ public class Interaction : MonoBehaviour
     private bool textActive;
     private bool mensaje;
     public bool winCondition;
-    private AudioSource audioSource;
+    public AudioSource search;
+    public AudioSource cardFound;
     public CharacterMovement player;
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();  
         textActive = false;
-        audioSource.Stop();
+        search.Stop();
+        cardFound.Stop();
     }
 
     // Update is called once per frame
@@ -39,12 +40,13 @@ public class Interaction : MonoBehaviour
                 {
                     if (!winCondition)
                     {
-                        audioSource.Play();
+                        search.Play();
                         DisplayText();
                     }
                     else
                     {
                         CardFound();
+                        cardFound.Play();
                         player.WinIsActive = true;
                     }
                 }   

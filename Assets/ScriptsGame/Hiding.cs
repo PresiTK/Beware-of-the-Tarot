@@ -9,10 +9,15 @@ public class Hiding : MonoBehaviour
     public CharacterHide characterHide;
     [SerializeField] private GameObject image;
     private bool hidedwasPressed = false;
+    private AudioSource hided_sound;
 
 
     private bool hide = false;
-
+    private void Start()
+    {
+        hided_sound = GetComponent<AudioSource>();
+        hided_sound.Stop();
+    }
     private void Update()
     {
 
@@ -22,11 +27,13 @@ public class Hiding : MonoBehaviour
         {
             characterHide.Hide();
             hidedwasPressed = true;
+            hided_sound.Play();
         }
         else if (Input.GetKeyDown(KeyCode.E) && !hide&& hidedwasPressed)
         {
             characterHide.UnHide();
             hidedwasPressed = false;
+            hided_sound.Play();
         }
 
     }
