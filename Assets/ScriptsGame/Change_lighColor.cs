@@ -8,8 +8,10 @@ public class Change_lighColor : MonoBehaviour
 {
     private Animator anim;
     private SpriteRenderer spriteRenderer;
+    public  Vector3 firstPosition;
     public GameObject player;
     public GameObject arribed;
+    public GameObject restart;
     public Light2D Light;
     private bool range=false;
     private float speed =5;
@@ -18,6 +20,7 @@ public class Change_lighColor : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        firstPosition = transform.position;
     }
     
     private void Update()
@@ -54,7 +57,10 @@ public class Change_lighColor : MonoBehaviour
             }
         }
         if (transform.position == player.transform.position){
-
+            player.transform.position = restart.transform.position;
+            transform.position=firstPosition;
+            goAway = false;
+            range = false;
         }
 
     }
