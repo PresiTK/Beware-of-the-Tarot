@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 7316989841451292241}
   - component: {fileID: 3696446258299764570}
   - component: {fileID: 670966042824138205}
+  - component: {fileID: 7119461538847756870}
   m_Layer: 0
   m_Name: Hide
   m_TagString: Hiding
@@ -481,6 +482,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &7119461538847756870
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5561910364539686671}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5c168d4459d7c34487d16d5fe48dabf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7353353862482950019
 GameObject:
   m_ObjectHideFlags: 0
