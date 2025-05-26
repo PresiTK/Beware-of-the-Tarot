@@ -6,6 +6,7 @@ using UnityEngine;
 public class Hiding : MonoBehaviour
 {
     private GameObject player;
+    private Animator animator;
     public CharacterHide characterHide;
     [SerializeField] private GameObject image;
     private bool hidedwasPressed = false;
@@ -17,6 +18,7 @@ public class Hiding : MonoBehaviour
     {
         hided_sound = GetComponent<AudioSource>();
         hided_sound.Stop();
+        animator = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -28,12 +30,15 @@ public class Hiding : MonoBehaviour
             characterHide.Hide();
             hidedwasPressed = true;
             hided_sound.Play();
+            animator.SetBool("Hide", true);
         }
         else if (Input.GetKeyDown(KeyCode.E) && !hide&& hidedwasPressed)
         {
             characterHide.UnHide();
             hidedwasPressed = false;
             hided_sound.Play();
+            animator.SetBool("Hide", true);
+
         }
 
     }
@@ -57,5 +62,8 @@ public class Hiding : MonoBehaviour
         }
     }
 
-
+    public void OnAnimationEnd()
+    {
+        animator.SetBool("Hide", false);
+    }
 }
