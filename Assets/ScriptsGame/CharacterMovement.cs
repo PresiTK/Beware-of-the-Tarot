@@ -107,9 +107,6 @@ public class CharacterMovement : MonoBehaviour
                 Stamina = Mathf.Min(Stamina, 1.5f); // Límite superior
             }
         }
-
-        Debug.Log("Stamina: " + Stamina);
-
     }
     //private void OnEnable()
     //{

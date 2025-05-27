@@ -12,6 +12,8 @@ public class Hiding : MonoBehaviour
     private bool hidedwasPressed = false;
     private AudioSource hided_sound;
 
+    private float timeEndAnim = 0;
+
 
     private bool hide = false;
     private void Start()
@@ -23,7 +25,15 @@ public class Hiding : MonoBehaviour
     private void Update()
     {
 
- 
+        if(timeEndAnim > 0)
+        {
+            timeEndAnim -= Time.deltaTime;
+            if (timeEndAnim <= 0)
+            {
+                Debug.Log("End Animation");
+                animator.SetBool("Hide", false);
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.E) && hide)
         {
@@ -31,6 +41,7 @@ public class Hiding : MonoBehaviour
             hidedwasPressed = true;
             hided_sound.Play();
             animator.SetBool("Hide", true);
+            timeEndAnim = 0.5f;
         }
         else if (Input.GetKeyDown(KeyCode.E) && !hide&& hidedwasPressed)
         {
@@ -38,7 +49,10 @@ public class Hiding : MonoBehaviour
             hidedwasPressed = false;
             hided_sound.Play();
             animator.SetBool("Hide", true);
-
+            timeEndAnim = 0.5f;
+        }
+        else
+        {
         }
 
     }
