@@ -29,6 +29,7 @@ public class CharacterMovement : MonoBehaviour
     public bool isHiding = false;
     public bool isSearching = false;
     private PlayerAudio playerAudio;
+    private bool paused = false;
 
     public bool pressingHide = false;
     private Animator animator;
@@ -50,7 +51,10 @@ public class CharacterMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Moving();
+        if (!paused)
+        {
+            Moving();
+        }
     }
     void Update()
     {
@@ -59,54 +63,58 @@ public class CharacterMovement : MonoBehaviour
             tarotSprite.SetActive(false);
             newTarotSprite.SetActive(true);
         }
-        UpdateDirection();
+        
         PlayAnimation();
+        if (Input.GetKeyDown(KeyCode.Escape) && pause.pauseMenu != null)
+        {
+            paused = !paused;
+            pause.Resume();
+        }
+        if (!paused) {
+            UpdateDirection();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                playerAudio.FlashlightOn();
+                light_flash = !light_flash;
+                flashlight.SetActive(light_flash);
+                if (light_flash)
+                {
+                    playerAudio.LightActive();
+                }
+                else
+                {
+                    playerAudio.LightNo();
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                isHiding = !isHiding ;
+            }
 
-    
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            playerAudio.FlashlightOn();
-            light_flash = !light_flash;
-            flashlight.SetActive(light_flash);
-            if (light_flash)
+            if (Stamina < 0f)
             {
-                playerAudio.LightActive();
+                Stamina = 0f;
+                isRunning = false;
             }
-            else
+            else if (Input.GetKey(KeyCode.LeftShift) &&  Stamina>0f)
             {
-                playerAudio.LightNo();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            isHiding = !isHiding ;
-        }
-        //if (Input.GetKeyDown(KeyCode.Escape) && pause.pauseMenu != null)
-        //{
-        //    pause.Resume();
-        //}
-        if (Stamina < 0f)
-        {
-            Stamina = 0f;
-            isRunning = false;
-        }
-        else if (Input.GetKey(KeyCode.LeftShift) &&  Stamina>0f)
-        {
             
-            isRunning = true;
-            Stamina -= Time.deltaTime;
-        }
-        else if(direction == Direction.NONE_DOWN|| direction == Direction.NONE_UP || direction == Direction.NONE_RIGHT|| direction == Direction.NONE_LEFT)
-        {
-            isRunning = false;
-
-            // Regenera stamina si el jugador no corre
-            if (Stamina < 2f)
+                isRunning = true;
+                Stamina -= Time.deltaTime;
+            }
+            else if(direction == Direction.NONE_DOWN|| direction == Direction.NONE_UP || direction == Direction.NONE_RIGHT|| direction == Direction.NONE_LEFT)
             {
-                Stamina += Time.deltaTime;
-                Stamina = Mathf.Min(Stamina, 1.5f); // Límite superior
+                isRunning = false;
+
+                // Regenera stamina si el jugador no corre
+                if (Stamina < 2f)
+                {
+                    Stamina += Time.deltaTime;
+                    Stamina = Mathf.Min(Stamina, 1.5f); // Límite superior
+                }
             }
         }
+
     }
     //private void OnEnable()
     //{
