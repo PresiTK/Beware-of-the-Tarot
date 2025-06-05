@@ -28,7 +28,7 @@ public class CharacterMovement : MonoBehaviour
     public bool isHiding = false;
     public bool isSearching = false;
     private PlayerAudio playerAudio;
-    private bool paused = false;
+    public bool paused = false;
 
     public bool pressingHide = false;
     private Animator animator;
@@ -66,7 +66,7 @@ public class CharacterMovement : MonoBehaviour
         PlayAnimation();
         if (Input.GetKeyDown(KeyCode.Escape) && pause.pauseMenu != null)
         {
-            paused = !paused;
+
             pause.Resume();
         }
         if (!paused) {
@@ -176,6 +176,7 @@ public class CharacterMovement : MonoBehaviour
 
         Vector2 movement = new Vector2(hInput, vInput).normalized;
         vector2 = movement;
+
         if (isRunning)
         {
             rb2d.velocity = new Vector2(movement.x * speedX*runingMultyply * Time.fixedDeltaTime, movement.y * speedY*runingMultyply * Time.fixedDeltaTime);

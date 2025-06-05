@@ -7,7 +7,7 @@ public class SkipTutorial : MonoBehaviour
 {
     public void Skip()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("TarotSceneObtained");
     }
     public void NoSkip()
     {

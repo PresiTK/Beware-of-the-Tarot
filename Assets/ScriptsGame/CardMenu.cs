@@ -4,28 +4,39 @@ using UnityEngine;
 
 public class CardMenu : MonoBehaviour
 {
-    public GameObject cardMenuCanvas;
-    private bool isCardMenuAvailable = false;
+    public GameObject teclas;
+    private bool canInteract = false;
+    public GameObject TarotMenus; // Asigna aquí el script de movimiento del personaje
+    public CharacterMovement characterMovement; // Asigna aquí el script de movimiento del personaje
     private void Start()
     {
-        cardMenuCanvas.SetActive(false);
+        teclas.SetActive(false);
     }
-    void Update()
+    private void Update()
     {
-        if (isCardMenuAvailable)
+        if (canInteract)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                cardMenuCanvas.SetActive(true);
+                TarotMenus.SetActive(true);
+                characterMovement.paused = true;
             }
         }
-
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            isCardMenuAvailable = !isCardMenuAvailable;
+            canInteract = true; // Permitir interacción al entrar en el trigger
+            teclas.SetActive(true);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            canInteract = false; // Desactivar interacción al salir del trigger
+            teclas.SetActive(false);
         }
     }
 }

@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CreditScene.unity
     guid: 40676dc26ddfc5940a45d5c7192ea7fd
+  - enabled: 1
+    path: Assets/Scenes/TarotSceneObtained.unity
+    guid: e17c5b2d2bf02504ab6ec9984151b8e0
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: 47faaa6f94cced5469c8dde4db451b07
   m_configObjects: {}

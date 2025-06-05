@@ -6,13 +6,17 @@ public class TarotCardRotation : MonoBehaviour
 {
     public GameObject contenidoUI; // Asigna aquí el hijo con RectTransform  
     public GameObject Button;
+    public GameObject Button2;
+    public CharacterMovement characterMovement; // Asigna aquí el script de movimiento del personaje
     public float velocidadRotacion = 30f;
     private bool rotate = false;
-
+    public bool canContinue=false;
     private CanvasGroup canvasGroup;
+    public TarotNextScene tarotNextScene; // Asigna aquí el script de la siguiente escena
 
     void Start()
     {
+        Button2.SetActive(false);
         if (contenidoUI != null)
         {
             canvasGroup = contenidoUI.GetComponent<CanvasGroup>();
@@ -41,10 +45,9 @@ public class TarotCardRotation : MonoBehaviour
             {
                 Button.SetActive(false);
             }
-            else
+            if (Mathf.Abs(Mathf.DeltaAngle(rotY, 180f)) < 1f)
             {
-                if (canvasGroup != null && canvasGroup.alpha != 1)
-                    canvasGroup.alpha = 1;
+                Button2.SetActive(true);
             }
         }
     }
@@ -52,5 +55,11 @@ public class TarotCardRotation : MonoBehaviour
     public void StartRotation()
     {
         rotate = true;
+        tarotNextScene.CanContinue = true; // Permitir continuar a la siguiente escena
+    }
+    public void Exit()
+    {
+        gameObject.SetActive(false);
+        characterMovement.paused = false; // Reanudar el movimiento del personaje
     }
 }

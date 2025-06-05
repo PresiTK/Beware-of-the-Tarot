@@ -6,10 +6,9 @@ using UnityEngine.SceneManagement;
 public class Pause : MonoBehaviour
 {
 
-
+    public CharacterMovement characterMovement; // Asigna aquí el script de movimiento del personaje
     public GameObject pauseMenu = null;
-    public GameObject boton1;
-    public GameObject boton2;
+
     private bool isPaused = false;
     private void Start()
     {
@@ -18,8 +17,6 @@ public class Pause : MonoBehaviour
             pauseMenu.SetActive(false);
         }
         isPaused = false;
-        boton1.SetActive(true);
-        boton2.SetActive(true);
     }
     // Update is called once per frame
     void Update()
@@ -32,6 +29,8 @@ public class Pause : MonoBehaviour
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0 : 1;
         pauseMenu.SetActive(isPaused);
+        characterMovement.paused = !characterMovement.paused; // Asegúrate de que el movimiento del personaje no esté pausado al inicio
+
     }
     public void returnMenu()
     {
