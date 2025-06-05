@@ -21,4 +21,8 @@ public class StartMenu : MonoBehaviour
     {
         AudioMixer.SetFloat("volume", volume);
     }
+    public void CreditOpen()
+    {
+        SceneManager.LoadScene("CreditScene");
+    }
 }

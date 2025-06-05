@@ -7,14 +7,6 @@ public class WinScreen : MonoBehaviour
 {
     [SerializeField] private GameObject Wincanva;
 
-    private void OnEnable()
-    {
-        Interaction.OnWin += WinMenu;
-    }
-    private void OnDisable()
-    {
-        Interaction.OnWin -= WinMenu;
-    }
     private void Start()
     {
         Wincanva.SetActive(false);

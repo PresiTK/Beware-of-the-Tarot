@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-    public static event Action OnWin;
     public static event Action<bool> OnCardNotFound;
     public static event Action<bool> OnCardFound;
 
