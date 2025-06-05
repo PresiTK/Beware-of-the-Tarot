@@ -822,6 +822,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 941265523626327849, guid: 57d13390d746b2144a629131b2d23d2a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27.78
+      objectReference: {fileID: 0}
     - target: {fileID: 1109095907103575985, guid: 57d13390d746b2144a629131b2d23d2a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -938,6 +942,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 5952972134762670392, guid: 57d13390d746b2144a629131b2d23d2a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27.78
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1041,6 +1049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teclas: {fileID: 818582740}
+  giveCard: {fileID: 2132118380}
 --- !u!1001 &2054722084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1165,11 +1174,11 @@ PrefabInstance:
     - target: {fileID: 3878300527671263417, guid: 73fe692773abfc14da5ce7187c724a64, type: 3}
       propertyPath: tarotSprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2011395119}
     - target: {fileID: 3878300527671263417, guid: 73fe692773abfc14da5ce7187c724a64, type: 3}
       propertyPath: newTarotSprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2011395120}
     - target: {fileID: 5833100967411274630, guid: 73fe692773abfc14da5ce7187c724a64, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1250,7 +1259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &2132118378
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1327,6 +1336,7 @@ MonoBehaviour:
   teclas: {fileID: 286627842}
   Card1: {fileID: 2011395120}
   Card2: {fileID: 2011395119}
+  Given: 0
 --- !u!82 &2132118381
 AudioSource:
   m_ObjectHideFlags: 0

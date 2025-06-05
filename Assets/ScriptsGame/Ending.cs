@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ending : MonoBehaviour
 {
     public GameObject teclas;
+    public GiveCard giveCard; // Referencia al script GiveCard para verificar si la carta fue entregada
     private bool ended = false;
     private void Start()
     {
@@ -16,7 +17,9 @@ public class Ending : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("CreditScene");
+                if (giveCard.Given) {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("CreditScene");
+                }
             }
         }
     }

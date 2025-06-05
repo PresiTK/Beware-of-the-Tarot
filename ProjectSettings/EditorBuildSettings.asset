@@ -9,20 +9,20 @@ EditorBuildSettings:
     path: Assets/Scenes/Start Scene.unity
     guid: f05f22ea627242c429252393aac5e738
   - enabled: 1
+    path: Assets/Scenes/CreditScene.unity
+    guid: 40676dc26ddfc5940a45d5c7192ea7fd
+  - enabled: 1
     path: Assets/Scenes/SkipTutorial.unity
     guid: 6086d2ddbdc04724388c39d0c3a9bf68
   - enabled: 1
     path: Assets/Scenes/Tutorial Scene.unity
     guid: e3e235f7d598ab146b2210bfc9fb801c
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
-    guid: 834b93d50f347ca4a862f9670b61898e
-  - enabled: 1
-    path: Assets/Scenes/CreditScene.unity
-    guid: 40676dc26ddfc5940a45d5c7192ea7fd
-  - enabled: 1
     path: Assets/Scenes/TarotSceneObtained.unity
     guid: e17c5b2d2bf02504ab6ec9984151b8e0
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 834b93d50f347ca4a862f9670b61898e
   - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: 47faaa6f94cced5469c8dde4db451b07

@@ -10,6 +10,7 @@ public class GiveCard : MonoBehaviour
     public GameObject Card1;
     public GameObject Card2;
     private AudioSource audioSource;
+    public bool Given = false; // Variable para verificar si la carta ya fue entregada
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -23,9 +24,13 @@ public class GiveCard : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Card1.SetActive(true); // Activar la carta 1
-                Card2.SetActive(false); // Desactivar la carta 2
-                audioSource.Play(); // Reproducir el sonido de la carta
+                if(!Given)
+                {
+                    Card1.SetActive(true); // Activar la carta 1
+                    Card2.SetActive(false); // Desactivar la carta 2
+                    audioSource.Play(); // Reproducir el sonido de la carta
+                    Given=true; // Marcar que la carta ha sido entregada
+                }
             }
         }
     }
