@@ -37,7 +37,7 @@ public class CharacterMovement : MonoBehaviour
     private Vector2 vector2;
     public bool WinIsActive = false;
     private float flashlightTimer = 20f;
-
+    public bool map = false;
     void Start()
     {
         tarotSprite.SetActive(true);
@@ -115,8 +115,15 @@ public class CharacterMovement : MonoBehaviour
             {
                 isHiding = !isHiding ;
             }
-
-            if (Stamina < 0f)
+            if (Input.GetKey(KeyCode.M))
+            {
+                map = true;
+            }
+            else
+            {
+                map = false;
+            }
+                if (Stamina < 0f)
             {
                 Stamina = 0f;
                 isRunning = false;
