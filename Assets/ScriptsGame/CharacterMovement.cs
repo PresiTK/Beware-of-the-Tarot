@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Rendering.Universal;
 
 public enum Direction { NONE_DOWN,NONE_UP,NONE_LEFT,NONE_RIGHT, UP, DOWN, LEFT, RIGHT , DIAGONAL_UP_RIGHT, DIAGONAL_UP_LEFT, DIAGONAL_DOWN_RIGHT, DIAGONAL_DOWN_LEFT };
@@ -16,6 +17,7 @@ public class CharacterMovement : MonoBehaviour
     public GameObject tarotSprite;
     public GameObject newTarotSprite;
     private float Stamina=2f;
+    public Light2D spotLight2D;
 
     public Rigidbody2D rb2d;
     public SpriteRenderer sprRender;
@@ -34,6 +36,7 @@ public class CharacterMovement : MonoBehaviour
     private Animator animator;
     private Vector2 vector2;
     public bool WinIsActive = false;
+    private float flashlightTimer = 20f;
 
     void Start()
     {
@@ -84,6 +87,29 @@ public class CharacterMovement : MonoBehaviour
                 {
                     playerAudio.LightNo();
                 }
+            }
+            if (!light_flash && flashlightTimer < 20f)
+            {
+                if(flashlightTimer < 6f)
+                {
+                    spotLight2D.intensity += Time.deltaTime * 0.75f;
+                }
+                flashlightTimer += Time.deltaTime * 0.75f;
+            }
+            else if (light_flash && flashlightTimer > 0f)
+            {
+                if (flashlightTimer <=6f)
+                {
+                    spotLight2D.intensity -= Time.deltaTime;
+                }
+                flashlightTimer -= Time.deltaTime;
+            }
+            if (flashlightTimer <= 0f)
+            {
+                light_flash = false;
+                flashlight.SetActive(false);
+                playerAudio.FlashlightOn();
+                playerAudio.LightNo();
             }
             if (Input.GetKeyDown(KeyCode.F1))
             {

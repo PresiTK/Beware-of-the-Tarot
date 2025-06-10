@@ -17,8 +17,8 @@ public class EnemyMovement : MonoBehaviour
     private Animator animator;
     private EnemyAudio audio;
     private bool patrolling = true;
-
-
+    private float timer = 2f;
+    private bool canKill = false;
     void Start()
     {
         if(player != null)
@@ -29,6 +29,8 @@ public class EnemyMovement : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
+        timer -= Time.deltaTime;
+
         audio = GetComponent<EnemyAudio>();
         audio.PatrolOff();
         audio.ChaseOff();
@@ -49,10 +51,19 @@ public class EnemyMovement : MonoBehaviour
             {
                 audio.PatrolOff();
                 audio.ChaseOn();
+                animator.SetTrigger("Detected");
+
             }
+            timer -= Time.deltaTime;
             patrolling = false;
-            animator.SetTrigger("Run");
-            detection.FollowPlayer(transform);
+
+            if (timer <= 0f)
+            {
+                canKill = true;
+                animator.SetTrigger("Run");
+                detection.FollowPlayer(transform);
+            }
+
         }
         else
         {
@@ -61,6 +72,8 @@ public class EnemyMovement : MonoBehaviour
                 audio.ChaseOff();
                 audio.PatrolOn();
             }
+            timer = 2f;
+            canKill = false;
             patrolling = true;
             patrol.FollowPath();
         }
@@ -75,9 +88,11 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player")&& !hide.isHiding)
         {
-            Destroy(collision.gameObject);
-            gameOverScreen.GameOverMenu();
-
+            if(canKill)
+            {
+                Destroy(collision.gameObject);
+                gameOverScreen.GameOverMenu();
+            }
         }
         if (collision.gameObject.tag.Equals("Door"))
         {
@@ -90,6 +105,7 @@ public class EnemyMovement : MonoBehaviour
             }
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag.Equals("Door"))
