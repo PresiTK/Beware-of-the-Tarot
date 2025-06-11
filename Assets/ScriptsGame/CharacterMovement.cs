@@ -65,7 +65,10 @@ public class CharacterMovement : MonoBehaviour
             tarotSprite.SetActive(false);
             newTarotSprite.SetActive(true);
         }
-        
+        if(spotLight2D.intensity<0)
+        {
+            spotLight2D.intensity = 0;
+        }
         PlayAnimation();
         if (Input.GetKeyDown(KeyCode.Escape) && pause.pauseMenu != null)
         {
@@ -90,9 +93,9 @@ public class CharacterMovement : MonoBehaviour
             }
             if (!light_flash && flashlightTimer < 20f)
             {
-                if(flashlightTimer < 6f)
+                if(flashlightTimer < 12f)
                 {
-                    spotLight2D.intensity += Time.deltaTime * 0.75f;
+                    spotLight2D.intensity += Time.deltaTime * 0.5f;
                 }
                 flashlightTimer += Time.deltaTime * 0.75f;
             }
