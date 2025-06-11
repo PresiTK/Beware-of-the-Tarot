@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public enum Direction { NONE_DOWN,NONE_UP,NONE_LEFT,NONE_RIGHT, UP, DOWN, LEFT, RIGHT , DIAGONAL_UP_RIGHT, DIAGONAL_UP_LEFT, DIAGONAL_DOWN_RIGHT, DIAGONAL_DOWN_LEFT };
 public class CharacterMovement : MonoBehaviour
@@ -17,6 +18,9 @@ public class CharacterMovement : MonoBehaviour
     public GameObject tarotSprite;
     public GameObject newTarotSprite;
     private float Stamina=2f;
+    public Image staminaBar;
+    public Image baterybar;
+
     public Light2D spotLight2D;
 
     public Rigidbody2D rb2d;
@@ -98,6 +102,8 @@ public class CharacterMovement : MonoBehaviour
                     spotLight2D.intensity += Time.deltaTime * 0.5f;
                 }
                 flashlightTimer += Time.deltaTime * 0.75f;
+                baterybar.fillAmount = flashlightTimer / 20f;
+
             }
             else if (light_flash && flashlightTimer > 0f)
             {
@@ -106,6 +112,7 @@ public class CharacterMovement : MonoBehaviour
                     spotLight2D.intensity -= Time.deltaTime;
                 }
                 flashlightTimer -= Time.deltaTime;
+                baterybar.fillAmount = flashlightTimer / 20f;
             }
             if (flashlightTimer <= 0f)
             {
@@ -135,6 +142,7 @@ public class CharacterMovement : MonoBehaviour
             {
             
                 isRunning = true;
+                staminaBar.fillAmount = Stamina / 2f; 
                 Stamina -= Time.deltaTime;
             }
             else if(direction == Direction.NONE_DOWN|| direction == Direction.NONE_UP || direction == Direction.NONE_RIGHT|| direction == Direction.NONE_LEFT)
@@ -145,7 +153,8 @@ public class CharacterMovement : MonoBehaviour
                 if (Stamina < 2f)
                 {
                     Stamina += Time.deltaTime;
-                    Stamina = Mathf.Min(Stamina, 1.5f); // Límite superior
+                    staminaBar.fillAmount = Stamina / 2f;
+                    Stamina = Mathf.Min(Stamina, 2.0f); // Límite superior
                 }
             }
         }
