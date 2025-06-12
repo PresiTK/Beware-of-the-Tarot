@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class ArcanaMenor : MonoBehaviour
 {
     public Transform destinoA;
     public Transform destinoB;
     public float velocidad = 2.0f;
+    public GameObject player;
+    public GameOverScreen gameOverScreen;
 
     private Transform objetivoActual;
     private bool haciaB = true;
@@ -49,6 +53,29 @@ public class ArcanaMenor : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0);
 
         }
-        
+
     }
+
+    private void FollowCharacter()
+    {
+        velocidad = 9f;
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, velocidad * Time.deltaTime);
+        if (transform.position == player.transform.position)
+        {
+            Destroy(player.gameObject);
+            gameOverScreen.GameOverMenu();
+        }
+
+        if (transform.position.x < player.transform.position.x)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 180);
+            spriteRenderer.flipY = true;
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            spriteRenderer.flipY = false;
+        }
+    }
+
 }

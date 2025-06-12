@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Patrullaarcanomenor : MonoBehaviour
 {
@@ -18,12 +19,21 @@ public class Patrullaarcanomenor : MonoBehaviour
     private int indiceActual = 0;
     private bool yendoAdelante = true;
     private bool iswaiting = false;
+    public GameOverScreen gameOverScreen;
+    public Light2D light2D;
+
+    public AudioSource patrol;
+    public AudioSource follow;
+    public AudioSource attack;
+    private Animator anim;
 
     private void Start()
     {
+        follow.Stop();
         sprite = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
-
+        patrol.Play();
+        anim = GetComponent<Animator>();
         if (puntosDeRuta == null || puntosDeRuta.Count == 0)
         {
             Debug.LogWarning("No se asignaron puntos de patrullaje.");
@@ -34,14 +44,18 @@ public class Patrullaarcanomenor : MonoBehaviour
         sprite.flipY = true;
         transform.rotation = Quaternion.Euler(0, 0, 180);
         isPlayerInRange = false;
-
+        attack.Stop();
     }
 
     private void Update()
     {
-        if(isPlayerInRange)
+        anim.SetBool("Range", isPlayerInRange);
+
+        if (isPlayerInRange)
         {
+
             FollowCharacter();
+
         }
         else
         {
@@ -56,28 +70,40 @@ public class Patrullaarcanomenor : MonoBehaviour
         velocidadMovimiento = 5f; // Velocidad de patrullaje
         transform.position = Vector2.MoveTowards(transform.position, target, velocidadMovimiento * Time.deltaTime);
 
+        if (yendoAdelante)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 180);
+            sprite.flipY = true;
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            sprite.flipY = false;
+        }
         Vector2 offsetedpos = transform.position;
 
 
         if (Vector2.Distance(offsetedpos, target) < distanciaMinima)
         {
             StartCoroutine(NextOrderedPath());
-            if(yendoAdelante)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 180);
-                sprite.flipY = true;
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                sprite.flipY = false;
-            }
+
         }
     }
     private void FollowCharacter()
     {
         velocidadMovimiento = 9f;
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, velocidadMovimiento * Time.deltaTime);
+        if(transform.position == player.transform.position)
+        {
+            attack.Play();
+            follow.Stop();
+            Destroy(player.gameObject);
+            gameOverScreen.GameOverMenu();
+        }
+        else
+        {
+            attack.Stop();
+        }
         if (transform.position.x < player.transform.position.x)
         {
             transform.rotation = Quaternion.Euler(0, 0, 180);
@@ -154,14 +180,21 @@ public class Patrullaarcanomenor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            light2D.color = Color.red;
             isPlayerInRange = true;
+            patrol.Stop();
+            follow.Play();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            light2D.color = Color.white;
+
             isPlayerInRange = false;
+            follow.Stop();
+            patrol.Play();
         }
     }
 

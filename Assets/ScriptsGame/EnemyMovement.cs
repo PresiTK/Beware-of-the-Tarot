@@ -19,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
     private bool patrolling = true;
     private float timer = 2f;
     private bool canKill = false;
+
     void Start()
     {
         if(player != null)
@@ -34,6 +35,7 @@ public class EnemyMovement : MonoBehaviour
         audio = GetComponent<EnemyAudio>();
         audio.PatrolOff();
         audio.ChaseOff();
+        audio.ScreamOff();
     }
 
     // Update is called once per frame
@@ -90,6 +92,8 @@ public class EnemyMovement : MonoBehaviour
         {
             if(canKill)
             {
+                audio.ChaseOff();
+                audio.Scream();
                 Destroy(collision.gameObject);
                 gameOverScreen.GameOverMenu();
             }
