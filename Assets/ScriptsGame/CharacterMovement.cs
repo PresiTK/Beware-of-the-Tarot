@@ -35,6 +35,7 @@ public class CharacterMovement : MonoBehaviour
     public bool isSearching = false;
     private PlayerAudio playerAudio;
     public bool paused = false;
+    public bool animationIsDone = false;
 
     public bool pressingHide = false;
     private Animator animator;
@@ -59,7 +60,7 @@ public class CharacterMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!paused)
+        if (!paused && animationIsDone)
         {
             Moving();
         }
@@ -86,7 +87,7 @@ public class CharacterMovement : MonoBehaviour
 
             pause.Resume();
         }
-        if (!paused) {
+        if (!paused && animationIsDone) {
             UpdateDirection();
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -326,7 +327,6 @@ public class CharacterMovement : MonoBehaviour
         {
             if (!playerAudio.steps.isPlaying)
             {
-                playerAudio.StepsOn();
             }
         }
         else
