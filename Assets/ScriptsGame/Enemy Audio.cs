@@ -13,6 +13,7 @@ public class EnemyAudio : MonoBehaviour
         patrol.Stop();
         chase.Stop();
         scream.Stop();
+        scream.volume = 0;
     }
     public void PatrolOn()
     {
@@ -32,6 +33,7 @@ public class EnemyAudio : MonoBehaviour
     }
     public void Scream()
     {
+        scream.volume = 1;
         scream.Play();
     }
     public void ScreamOff()

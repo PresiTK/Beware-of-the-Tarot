@@ -21,11 +21,13 @@ public class Patrullaarcanomenor : MonoBehaviour
     private bool iswaiting = false;
     public GameOverScreen gameOverScreen;
     public Light2D light2D;
+    private float timer = 1f; // Tiempo para seguir al jugador
 
     public AudioSource patrol;
     public AudioSource follow;
     public AudioSource attack;
     private Animator anim;
+    public Animator Scream;
 
     private void Start()
     {
@@ -53,8 +55,13 @@ public class Patrullaarcanomenor : MonoBehaviour
 
         if (isPlayerInRange)
         {
+            timer -= Time.deltaTime;
 
-            FollowCharacter();
+            if (timer <= 0f)
+            {
+                FollowCharacter();
+
+            }
 
         }
         else
@@ -98,7 +105,7 @@ public class Patrullaarcanomenor : MonoBehaviour
             attack.Play();
             follow.Stop();
             Destroy(player.gameObject);
-            gameOverScreen.GameOverMenu();
+            Scream.SetTrigger("MinorScream");
         }
         else
         {
@@ -195,6 +202,7 @@ public class Patrullaarcanomenor : MonoBehaviour
             isPlayerInRange = false;
             follow.Stop();
             patrol.Play();
+            timer = 1f; // Reinicia el temporizador al salir del rango del jugador
         }
     }
 

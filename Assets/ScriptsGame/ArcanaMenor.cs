@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.U2D;
 
 public class ArcanaMenor : MonoBehaviour
@@ -11,11 +12,13 @@ public class ArcanaMenor : MonoBehaviour
     public float velocidad = 2.0f;
     public GameObject player;
     public GameOverScreen gameOverScreen;
+    public Light2D Light;
 
     private Transform objetivoActual;
     private bool haciaB = true;
     private SpriteRenderer spriteRenderer;
-
+    private bool isPlayerInRange = false;
+    private float timer = 4f; // Tiempo para seguir al jugador
     void Start()
     {
         objetivoActual = destinoB;
@@ -30,7 +33,22 @@ public class ArcanaMenor : MonoBehaviour
 
     void Update()
     {
-        // Mueve el objeto hacia el objetivo actual
+        if (isPlayerInRange)
+        {
+            timer -= Time.deltaTime;
+            if (timer < 0)
+            {
+                FollowCharacter();
+            }
+        }
+        else
+        {
+            Patrol();
+        }
+    }
+    private void Patrol()
+    {
+        velocidad = 2.0f; // Velocidad de patrullaje
         transform.position = Vector3.MoveTowards(transform.position, objetivoActual.position, velocidad * Time.deltaTime);
 
         // Cambia el objetivo cuando llega
@@ -53,12 +71,11 @@ public class ArcanaMenor : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0);
 
         }
-
     }
 
     private void FollowCharacter()
     {
-        velocidad = 9f;
+        velocidad = 12f;
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, velocidad * Time.deltaTime);
         if (transform.position == player.transform.position)
         {
@@ -77,5 +94,23 @@ public class ArcanaMenor : MonoBehaviour
             spriteRenderer.flipY = false;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            isPlayerInRange = true;
+            Light.color = Color.red; // Cambia el color de la luz al entrar en rango
+        }
 
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            isPlayerInRange = false;
+            Light.color = Color.white; // Restaura el color de la luz al salir del rango
+            timer= 4f; // Reinicia el temporizador al salir del rango del jugador
+        }
+    }
 }
+

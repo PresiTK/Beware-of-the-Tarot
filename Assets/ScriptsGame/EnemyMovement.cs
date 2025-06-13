@@ -17,8 +17,9 @@ public class EnemyMovement : MonoBehaviour
     private Animator animator;
     private EnemyAudio audio;
     private bool patrolling = true;
-    private float timer = 2f;
+    private float timer = 1f;
     private bool canKill = false;
+    public Animator Scream;
 
     void Start()
     {
@@ -74,7 +75,7 @@ public class EnemyMovement : MonoBehaviour
                 audio.ChaseOff();
                 audio.PatrolOn();
             }
-            timer = 2f;
+            timer = 1f;
             canKill = false;
             patrolling = true;
             patrol.FollowPath();
@@ -95,7 +96,7 @@ public class EnemyMovement : MonoBehaviour
                 audio.ChaseOff();
                 audio.Scream();
                 Destroy(collision.gameObject);
-                gameOverScreen.GameOverMenu();
+                Scream.SetTrigger("ScreamColgado");
             }
         }
         if (collision.gameObject.tag.Equals("Door"))

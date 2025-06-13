@@ -42,6 +42,8 @@ public class CharacterMovement : MonoBehaviour
     public bool WinIsActive = false;
     private float flashlightTimer = 20f;
     public bool map = false;
+    public CardAnimation cardanimated;
+    private bool once =true;
     void Start()
     {
         tarotSprite.SetActive(true);
@@ -68,6 +70,11 @@ public class CharacterMovement : MonoBehaviour
         {
             tarotSprite.SetActive(false);
             newTarotSprite.SetActive(true);
+            if (once)
+            {
+                cardanimated.ObtianedCard();
+                once = false;
+            }
         }
         if(spotLight2D.intensity<0)
         {
@@ -145,7 +152,11 @@ public class CharacterMovement : MonoBehaviour
                 staminaBar.fillAmount = Stamina / 2f; 
                 Stamina -= Time.deltaTime;
             }
-            else if(direction == Direction.NONE_DOWN|| direction == Direction.NONE_UP || direction == Direction.NONE_RIGHT|| direction == Direction.NONE_LEFT)
+            else
+            {
+                isRunning = false;
+            }
+            if(direction == Direction.NONE_DOWN|| direction == Direction.NONE_UP || direction == Direction.NONE_RIGHT|| direction == Direction.NONE_LEFT)
             {
                 isRunning = false;
 
@@ -160,19 +171,6 @@ public class CharacterMovement : MonoBehaviour
         }
 
     }
-    //private void OnEnable()
-    //{
-    //    InputController.OnInteract += TogglePressingHide;
-    //}
-    //private void OnDisable()
-    //{
-    //    InputController.OnInteract -= TogglePressingHide;
-    //}
-    //public void TogglePressingHide()
-    //{
-    //    Renderer.enabled = pressingHide;
-
-    //}
 
 
 
