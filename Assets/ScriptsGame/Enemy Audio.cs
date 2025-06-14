@@ -4,40 +4,46 @@ using UnityEngine;
 
 public class EnemyAudio : MonoBehaviour
 {
-    public AudioSource patrol;
-    public AudioSource chase;
+
+    public  AudioSource audioSource;
+    public AudioClip[] audioClips;
     public AudioSource scream;
 
     private void Start()
     {
-        patrol.Stop();
-        chase.Stop();
+        audioSource.clip = audioClips[0];
+        audioSource.Stop();
         scream.Stop();
-        scream.volume = 0;
     }
     public void PatrolOn()
     {
-        patrol.Play();
+        audioSource.clip = audioClips[0];
+        audioSource.Play();
     }
     public void PatrolOff()
     {
-        patrol.Stop();
+        audioSource.clip = audioClips[0];
+        audioSource.Stop();
     }
     public void ChaseOn()
     {
-        chase.Play();
+        audioSource.clip = audioClips[1];
+        audioSource.Play();
     }
     public void ChaseOff()
     {
-        chase.Stop();
+        audioSource.clip = audioClips[1];
+        audioSource.Stop();
     }
     public void Scream()
     {
-        scream.volume = 1;
+        
+        scream.clip = audioClips[2];
         scream.Play();
     }
     public void ScreamOff()
     {
-        scream.Stop();
+        audioSource.clip = audioClips[2];
+        audioSource.Stop();
     }
 }

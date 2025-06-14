@@ -62,6 +62,16 @@ public class Patrullaarcanomenor : MonoBehaviour
                 FollowCharacter();
 
             }
+            if (player.transform.position.x > transform.position.x)
+            {
+                sprite.flipY = true; // mirando a la derecha
+                transform.rotation = Quaternion.Euler(0, 0, 180);
+            }
+            else
+            {
+                sprite.flipY = false; // mirando a la izquierda
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
 
         }
         else
@@ -77,15 +87,15 @@ public class Patrullaarcanomenor : MonoBehaviour
         velocidadMovimiento = 5f; // Velocidad de patrullaje
         transform.position = Vector2.MoveTowards(transform.position, target, velocidadMovimiento * Time.deltaTime);
 
-        if (yendoAdelante)
+        if (transform.position.x < target.x)
         {
+            sprite.flipY = true; // mirando a la derecha
             transform.rotation = Quaternion.Euler(0, 0, 180);
-            sprite.flipY = true;
         }
         else
         {
+            sprite.flipY = false; // mirando a la izquierda
             transform.rotation = Quaternion.Euler(0, 0, 0);
-            sprite.flipY = false;
         }
         Vector2 offsetedpos = transform.position;
 

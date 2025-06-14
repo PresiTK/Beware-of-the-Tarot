@@ -13,7 +13,11 @@ public class ArcanaMenor : MonoBehaviour
     public GameObject player;
     public GameOverScreen gameOverScreen;
     public Light2D Light;
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
 
+    public Animator Screamer;
+    public AudioSource scream;
     private Transform objetivoActual;
     private bool haciaB = true;
     private SpriteRenderer spriteRenderer;
@@ -29,6 +33,9 @@ public class ArcanaMenor : MonoBehaviour
         {
             Debug.LogWarning("No se encontró un SpriteRenderer en este GameObject.");
         }
+        audioSource.clip = audioClips[0]; // Asigna el clip de patrullaje al inicio 
+        audioSource.Play();
+
     }
 
     void Update()
@@ -39,6 +46,16 @@ public class ArcanaMenor : MonoBehaviour
             if (timer < 0)
             {
                 FollowCharacter();
+            }
+            if(player.transform.position.x > transform.position.x)
+            {
+                spriteRenderer.flipY = true; // mirando a la derecha
+                transform.rotation = Quaternion.Euler(0, 0, 180);
+            }
+            else
+            {
+                spriteRenderer.flipY = false; // mirando a la izquierda
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
         }
         else
@@ -81,23 +98,17 @@ public class ArcanaMenor : MonoBehaviour
         {
             Destroy(player.gameObject);
             gameOverScreen.GameOverMenu();
-        }
-
-        if (transform.position.x < player.transform.position.x)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 180);
-            spriteRenderer.flipY = true;
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            spriteRenderer.flipY = false;
+            Screamer.SetTrigger("MinorScream");
+            scream.clip = audioClips[2]; // Cambia el clip de audio a grito
+            scream.Play(); // Reproduce el grito
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            audioSource.clip = audioClips[1]; // Cambia el clip de audio a persecución
+            audioSource.Play(); // Reproduce el clip de persecución
             isPlayerInRange = true;
             Light.color = Color.red; // Cambia el color de la luz al entrar en rango
         }
@@ -107,6 +118,7 @@ public class ArcanaMenor : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            audioSource.clip = audioClips[0]; // Cambia el clip de audio a patrullaje
             isPlayerInRange = false;
             Light.color = Color.white; // Restaura el color de la luz al salir del rango
             timer= 4f; // Reinicia el temporizador al salir del rango del jugador

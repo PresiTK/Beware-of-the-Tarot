@@ -17,15 +17,18 @@ public class Interaction : MonoBehaviour
     private bool textActive;
     private bool mensaje;
     public bool winCondition;
-    public AudioSource search;
-    public AudioSource cardFound;
+    public AudioClip[] audioClips;
+    private AudioSource audioSource;
     public CharacterMovement player;
     // Start is called before the first frame update
     void Start()
     {
         textActive = false;
-        search.Stop();
-        cardFound.Stop();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = 0;
+        audioSource.clip = audioClips[1];
+        audioSource.Stop();
+
     }
 
     // Update is called once per frame
@@ -39,13 +42,15 @@ public class Interaction : MonoBehaviour
                 {
                     if (!winCondition)
                     {
-                        search.Play();
+                        audioSource.clip = audioClips[1];
+                        audioSource.Play();
                         DisplayText();
                     }
                     else
                     {
                         CardFound();
-                        cardFound.Play();
+                        audioSource.clip = audioClips[0];
+                        audioSource.Play();
                         player.WinIsActive = true;
                     }
                 }   
@@ -62,15 +67,12 @@ public class Interaction : MonoBehaviour
     }
     private void CardFound()
     {
-        OnCardFound?.Invoke(true);
         textActive = true;
         currentTime = deactivateTime;
         player.isSearching = true;
-
     }
     private void DisplayText()
     {
-        OnCardNotFound?.Invoke(true);
         textActive = true;
         currentTime = deactivateTime;
         player.isSearching = true;
@@ -79,15 +81,13 @@ public class Interaction : MonoBehaviour
     {
         player.isSearching = false;
         textActive = false;
-        OnCardNotFound?.Invoke(false);
-        OnCardFound?.Invoke(false);
-
         player.isSearching = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
+            audioSource.volume = 1; // Set volume to 50%
             HideText();
             image.SetActive(true);
             mensaje = true;
