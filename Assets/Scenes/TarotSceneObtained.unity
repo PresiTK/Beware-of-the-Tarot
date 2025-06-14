@@ -1171,6 +1171,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1971267677197867605, guid: 55585408f4fc864499e448d7daa3aec7, type: 3}
   m_PrefabInstance: {fileID: 1412928586}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1412928588 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 396814812178115721, guid: 55585408f4fc864499e448d7daa3aec7, type: 3}
+  m_PrefabInstance: {fileID: 1412928586}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1431514843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1262,7 +1267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayPerCharacter: 0.05
   textBoxControl: {fileID: 2082046871}
-  charstoPlay: 3
+  charstoPlay: 4
 --- !u!1001 &1633984525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1358,6 +1363,10 @@ PrefabInstance:
     - target: {fileID: 3851566644336789012, guid: 7a4251b164e780b41a8a6e5e8bb356a8, type: 3}
       propertyPath: m_Name
       value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 3851566644336789012, guid: 7a4251b164e780b41a8a6e5e8bb356a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8850927534080598018, guid: 7a4251b164e780b41a8a6e5e8bb356a8, type: 3}
       propertyPath: characterMovement
@@ -1929,6 +1938,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6d16a04b9f59bec4697e14dc661e8b79, type: 3}
   - {fileID: 21300000, guid: c9a189f438c326c4d85015c7ed61a7aa, type: 3}
   - {fileID: 21300000, guid: 9f61f433953a96849819611d0b95f420, type: 3}
+  audioSource: {fileID: 1412928588}
+  audioClips:
+  - {fileID: 8300000, guid: ca025c04334717447b1a047c2f607947, type: 3}
+  - {fileID: 8300000, guid: 430643afe5ee52848a2c5503f7bbc8cc, type: 3}
+  - {fileID: 8300000, guid: b505b18bb60bc02428fd87de93d5d785, type: 3}
   textoTMP: {fileID: 1516235014}
 --- !u!1001 &2094986178
 PrefabInstance:
