@@ -13,7 +13,7 @@ public class PlayerAudio : MonoBehaviour
 
     public void StepsOn()
     {
-        steps.Play();
+        steps.PlayOneShot(steps.clip);
     }
     public void RunOn()
     {

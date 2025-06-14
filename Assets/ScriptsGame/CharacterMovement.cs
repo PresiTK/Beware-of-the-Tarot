@@ -35,7 +35,7 @@ public class CharacterMovement : MonoBehaviour
     public bool isSearching = false;
     private PlayerAudio playerAudio;
     public bool paused = false;
-    public bool animationIsDone = false;
+    public bool animationIsDone = true;
 
     public bool pressingHide = false;
     private Animator animator;
@@ -45,6 +45,7 @@ public class CharacterMovement : MonoBehaviour
     public bool map = false;
     public CardAnimation cardanimated;
     private bool once =true;
+    private bool Stop=false;
     void Start()
     {
         tarotSprite.SetActive(true);
@@ -62,111 +63,130 @@ public class CharacterMovement : MonoBehaviour
     {
         if (!paused && animationIsDone)
         {
+            Stop = true;
             Moving();
+        }
+        else
+        {
+            if (Stop)
+            {
+                direction = Direction.NONE_DOWN;
+                Moving();
+                UpdateDirection();
+            }
+            animator.SetTrigger("Static");
+
+            Stop = false;
         }
     }
     void Update()
     {
-        if (WinIsActive)
-        {
-            tarotSprite.SetActive(false);
-            newTarotSprite.SetActive(true);
-            if (once)
-            {
-                cardanimated.ObtianedCard();
-                once = false;
-            }
-        }
-        if(spotLight2D.intensity<0)
-        {
-            spotLight2D.intensity = 0;
-        }
-        PlayAnimation();
         if (Input.GetKeyDown(KeyCode.Escape) && pause.pauseMenu != null)
         {
 
             pause.Resume();
         }
-        if (!paused && animationIsDone) {
-            UpdateDirection();
-            if (Input.GetKeyDown(KeyCode.F))
+        if (!paused && animationIsDone)
+        {
+
+            if (WinIsActive)
             {
-                playerAudio.FlashlightOn();
-                light_flash = !light_flash;
-                flashlight.SetActive(light_flash);
-                if (light_flash)
+                tarotSprite.SetActive(false);
+                newTarotSprite.SetActive(true);
+                if (once)
                 {
-                    playerAudio.LightActive();
+                    cardanimated.ObtianedCard();
+                    once = false;
+                }
+            }
+            if (spotLight2D.intensity < 0)
+            {
+                spotLight2D.intensity = 0;
+            }
+            PlayAnimation();
+
+            if (!paused && animationIsDone)
+            {
+                UpdateDirection();
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    playerAudio.FlashlightOn();
+                    light_flash = !light_flash;
+                    flashlight.SetActive(light_flash);
+                    if (light_flash)
+                    {
+                        playerAudio.LightActive();
+                    }
+                    else
+                    {
+                        playerAudio.LightNo();
+                    }
+                }
+                if (!light_flash && flashlightTimer < 20f)
+                {
+                    if (flashlightTimer < 12f)
+                    {
+                        spotLight2D.intensity += Time.deltaTime * 0.5f;
+                    }
+                    flashlightTimer += Time.deltaTime * 0.75f;
+                    baterybar.fillAmount = flashlightTimer / 20f;
+
+                }
+                else if (light_flash && flashlightTimer > 0f)
+                {
+                    if (flashlightTimer <= 6f)
+                    {
+                        spotLight2D.intensity -= Time.deltaTime;
+                    }
+                    flashlightTimer -= Time.deltaTime;
+                    baterybar.fillAmount = flashlightTimer / 20f;
+                }
+                if (flashlightTimer <= 0f)
+                {
+                    light_flash = false;
+                    flashlight.SetActive(false);
+                    playerAudio.FlashlightOn();
+                    playerAudio.LightNo();
+                }
+                if (Input.GetKeyDown(KeyCode.F1))
+                {
+                    isHiding = !isHiding;
+                }
+                if (Input.GetKey(KeyCode.M))
+                {
+                    map = true;
                 }
                 else
                 {
-                    playerAudio.LightNo();
+                    map = false;
                 }
-            }
-            if (!light_flash && flashlightTimer < 20f)
-            {
-                if(flashlightTimer < 12f)
-                {
-                    spotLight2D.intensity += Time.deltaTime * 0.5f;
-                }
-                flashlightTimer += Time.deltaTime * 0.75f;
-                baterybar.fillAmount = flashlightTimer / 20f;
-
-            }
-            else if (light_flash && flashlightTimer > 0f)
-            {
-                if (flashlightTimer <=6f)
-                {
-                    spotLight2D.intensity -= Time.deltaTime;
-                }
-                flashlightTimer -= Time.deltaTime;
-                baterybar.fillAmount = flashlightTimer / 20f;
-            }
-            if (flashlightTimer <= 0f)
-            {
-                light_flash = false;
-                flashlight.SetActive(false);
-                playerAudio.FlashlightOn();
-                playerAudio.LightNo();
-            }
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                isHiding = !isHiding ;
-            }
-            if (Input.GetKey(KeyCode.M))
-            {
-                map = true;
-            }
-            else
-            {
-                map = false;
-            }
                 if (Stamina < 0f)
-            {
-                Stamina = 0f;
-                isRunning = false;
-            }
-            else if (Input.GetKey(KeyCode.LeftShift) &&  Stamina>0f)
-            {
-            
-                isRunning = true;
-                staminaBar.fillAmount = Stamina / 2f; 
-                Stamina -= Time.deltaTime;
-            }
-            else
-            {
-                isRunning = false;
-            }
-            if(direction == Direction.NONE_DOWN|| direction == Direction.NONE_UP || direction == Direction.NONE_RIGHT|| direction == Direction.NONE_LEFT)
-            {
-                isRunning = false;
-
-                // Regenera stamina si el jugador no corre
-                if (Stamina < 2f)
                 {
-                    Stamina += Time.deltaTime;
+                    Stamina = 0f;
+                    isRunning = false;
+                }
+                else if (Input.GetKey(KeyCode.LeftShift) && Stamina > 0f)
+                {
+
+                    isRunning = true;
                     staminaBar.fillAmount = Stamina / 2f;
-                    Stamina = Mathf.Min(Stamina, 2.0f); // Límite superior
+                    Stamina -= Time.deltaTime;
+                }
+                else
+                {
+                    isRunning = false;
+                }
+                if (direction == Direction.NONE_DOWN || direction == Direction.NONE_UP || direction == Direction.NONE_RIGHT || direction == Direction.NONE_LEFT)
+                {
+                    isRunning = false;
+
+                    // Regenera stamina si el jugador no corre
+                    if (Stamina < 2f)
+                    {
+                        Stamina += Time.deltaTime;
+                        staminaBar.fillAmount = Stamina / 2f;
+                        Stamina = Mathf.Min(Stamina, 2.0f); // Límite superior
+                    }
                 }
             }
         }

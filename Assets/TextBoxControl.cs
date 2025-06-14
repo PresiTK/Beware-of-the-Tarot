@@ -63,10 +63,6 @@ public class TextBoxControl : MonoBehaviour
         {
             textoTMP.text = "Friend, this is a GoodBye, Have fun.\r\n\r\n(Press ENTER to Continue)..";
         }
-        if (currentTextIndex <= 3)
-        {
-            currentTextIndex++;
-        }
-
+        currentTextIndex++;
     }
 }

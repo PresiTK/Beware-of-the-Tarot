@@ -2152,6 +2152,7 @@ MonoBehaviour:
   isHiding: 0
   isSearching: 0
   paused: 0
+  animationIsDone: 1
   pressingHide: 0
   WinIsActive: 0
   map: 0

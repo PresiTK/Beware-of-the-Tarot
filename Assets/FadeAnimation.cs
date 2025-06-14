@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Fade : MonoBehaviour
+public class FadeAnimation : MonoBehaviour
 {
     public float delayPerCharacter = 0.05f;
 
     private bool continuePlaying = false; // Variable para controlar si se continúa jugando
     private TextMeshProUGUI textMesh;
-    public TextBoxControl textBoxControl; // Asigna aquí el script de control del cuadro de texto
+    public AnimationScript textBoxControl; // Asigna aquí el script de control del cuadro de texto
     private AudioSource audioSource;
     [SerializeField] private int charstoPlay;
     private bool endedSound = false;
@@ -18,6 +18,7 @@ public class Fade : MonoBehaviour
         textMesh = GetComponent<TextMeshProUGUI>();
         audioSource = GetComponent<AudioSource>();
         endedSound = false;
+        continuePlaying = false; // Asegúrate de que continuePlaying esté en false al inicio
 
         if (textMesh != null)
         {
@@ -25,11 +26,10 @@ public class Fade : MonoBehaviour
             textMesh.maxVisibleCharacters = 0;
             StartCoroutine(RevealCharacters());
         }
-        continuePlaying = false; // Asegúrate de que continuePlaying esté en false al inicio
     }
     private void Update()
     {
-        if(continuePlaying&&Input.GetKeyDown(KeyCode.Return))
+        if (continuePlaying && Input.GetKeyDown(KeyCode.Return))
         {
             textBoxControl.HideTextBox();
         }
@@ -47,10 +47,9 @@ public class Fade : MonoBehaviour
             {
                 if (!endedSound)
                 {
-                    audioSource.Play(); 
-                    if (textMesh.text[i+1] == '(')
+                    audioSource.Play(); // Reproduce el sonido al revelar cada carácter
+                    if (textMesh.text[i + 1] == '(')
                     {
-                        
                         endedSound = true;
                     }
                 }
