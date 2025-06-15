@@ -43,8 +43,6 @@ public class Patrullaarcanomenor : MonoBehaviour
             return;
         }
         target = puntosDeRuta[indiceActual].position + new Vector3(0, 2f, 0);
-        sprite.flipY = true;
-        transform.rotation = Quaternion.Euler(0, 0, 180);
         isPlayerInRange = false;
         attack.Stop();
     }
@@ -64,13 +62,11 @@ public class Patrullaarcanomenor : MonoBehaviour
             }
             if (player.transform.position.x > transform.position.x)
             {
-                sprite.flipY = true; // mirando a la derecha
-                transform.rotation = Quaternion.Euler(0, 0, 180);
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             else
             {
-                sprite.flipY = false; // mirando a la izquierda
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                transform.rotation = Quaternion.Euler(0, -180, 0);
             }
 
         }
@@ -87,16 +83,7 @@ public class Patrullaarcanomenor : MonoBehaviour
         velocidadMovimiento = 5f; // Velocidad de patrullaje
         transform.position = Vector2.MoveTowards(transform.position, target, velocidadMovimiento * Time.deltaTime);
 
-        if (transform.position.x < target.x)
-        {
-            sprite.flipY = true; // mirando a la derecha
-            transform.rotation = Quaternion.Euler(0, 0, 180);
-        }
-        else
-        {
-            sprite.flipY = false; // mirando a la izquierda
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
+
         Vector2 offsetedpos = transform.position;
 
 
@@ -123,13 +110,11 @@ public class Patrullaarcanomenor : MonoBehaviour
         }
         if (transform.position.x < player.transform.position.x)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 180);
-            sprite.flipY = true;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            sprite.flipY = false;
+            transform.rotation = Quaternion.Euler(0, -180, 0);
         }
     }
 
@@ -142,7 +127,6 @@ public class Patrullaarcanomenor : MonoBehaviour
         // Teletransporte hacia adelante
         if (yendoAdelante)
         {
-            sprite.flipX = true; // mirando a la derecha
             if (indiceActual == 1)
             {
                 indiceActual = 2;
