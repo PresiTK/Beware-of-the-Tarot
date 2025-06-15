@@ -28,8 +28,7 @@ public class AnimationScript : MonoBehaviour
         textbox.SetActive(false);
         textboxSprite.sprite =spriteRenderers[0];
         audioSource.clip = audioClips[0];
-        textoTMP.text = "Hi bro im here how is it going \r\n\r\n(Press ENTER to Continue)..";
-        textbox.SetActive(true);
+        textoTMP.text = "Wow... A tarot board? Where did this come from?\r\n\r\n(Press ENTER to Continue)..";
     }
     private void Update()
     {
@@ -54,8 +53,7 @@ public class AnimationScript : MonoBehaviour
     {
         if (currentTextIndex == 0)
         {
-            
-            textoTMP.text = "Uh Whats hapeninig?.\r\n\r\n(Press ENTER to Continue)..";
+            textoTMP.text = "Ugh... What's happening?\r\n\r\n(Press ENTER to Continue).."; // Hermana (0)
             ShowTextBox();
         }
         else if (currentTextIndex == 1)
@@ -64,9 +62,8 @@ public class AnimationScript : MonoBehaviour
             audioSource.clip = audioClips[2];
 
             card.SetActive(true);
-            textoTMP.text = "Hahahahahahha.\r\n\r\n(Press ENTER to Continue)..";
+            textoTMP.text = "Hahahahahaha!\r\n\r\n(Press ENTER to Continue).."; // Carta (2)
             ShowTextBox();
-
         }
         else if (currentTextIndex == 2)
         {
@@ -74,38 +71,33 @@ public class AnimationScript : MonoBehaviour
             textboxSprite.sprite = spriteRenderers[1];
             audioSource.clip = audioClips[1];
 
-            textoTMP.text = "You What do you want.\r\n\r\n(Press ENTER to Continue)..";
-
+            textoTMP.text = "Who are you?! What do you want?\r\n\r\n(Press ENTER to Continue).."; // Tú (1)
             ShowTextBox();
-
         }
         else if (currentTextIndex == 3)
         {
             textboxSprite.sprite = spriteRenderers[2];
             audioSource.clip = audioClips[2];
 
-            textoTMP.text = "Your Sister .\r\n\r\n(Press ENTER to Continue)..";
+            textoTMP.text = "Your sister...\r\n\r\n(Press ENTER to Continue).."; // Carta (2)
             ShowTextBox();
             cardAnimator.SetTrigger("Absorbing");
-
         }
         else if (currentTextIndex == 4)
         {
             textboxSprite.sprite = spriteRenderers[0];
             audioSource.clip = audioClips[0];
 
-            hoppyAnimtor.SetTrigger("Rolling");
-            textoTMP.text = "Please broo help.\r\n\r\n(Press ENTER to Continue)..";
+            textoTMP.text = "Please... bro, help me!\r\n\r\n(Press ENTER to Continue).."; // Hermana (0)
             hoppyAnimtor.SetTrigger("Absorb");
             ShowTextBox();
-
         }
-        else if(currentTextIndex == 5)
+        else if (currentTextIndex == 5)
         {
             textboxSprite.sprite = spriteRenderers[1];
             audioSource.clip = audioClips[1];
 
-            textoTMP.text = "Leave my sister alone\r\n\r\n(Press ENTER to Continue)..";
+            textoTMP.text = "Let my sister go!\r\n\r\n(Press ENTER to Continue).."; // Tú (1)
             ShowTextBox();
         }
         else if (currentTextIndex == 6)
@@ -113,7 +105,7 @@ public class AnimationScript : MonoBehaviour
             textboxSprite.sprite = spriteRenderers[2];
             audioSource.clip = audioClips[2];
 
-            textoTMP.text = "Thats imposible, defeat me and your sister will be free.\r\n\r\n(Press ENTER to Continue)..";
+            textoTMP.text = "That's impossible. Defeat me, and she will be free.\r\n\r\n(Press ENTER to Continue).."; // Carta (2)
             ShowTextBox();
         }
         else if (currentTextIndex == 7)
@@ -121,10 +113,11 @@ public class AnimationScript : MonoBehaviour
             textboxSprite.sprite = spriteRenderers[1];
             audioSource.clip = audioClips[1];
 
-            textoTMP.text = "Please stop.\r\n\r\n(Press ENTER to Continue)..";
+            textoTMP.text = "Please... stop this.\r\n\r\n(Press ENTER to Continue).."; // Tú (1)
             ShowTextBox();
             cardAnimator.SetTrigger("bye");
         }
+
 
         currentTextIndex++;
     }

@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-    public static event Action<bool> OnCardNotFound;
-    public static event Action<bool> OnCardFound;
-
-
     [SerializeField] private GameObject image;
 
     [SerializeField] private float deactivateTime = 4.0f;

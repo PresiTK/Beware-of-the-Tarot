@@ -11,6 +11,9 @@ public class GiveCard : MonoBehaviour
     public GameObject Card2;
     private AudioSource audioSource;
     public bool Given = false; // Variable para verificar si la carta ya fue entregada
+    public CharacterMovement player;
+    public Animator hoppyAnimator;
+    public GestotAnim textBox;
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -30,6 +33,9 @@ public class GiveCard : MonoBehaviour
                     Card2.SetActive(false); // Desactivar la carta 2
                     audioSource.Play(); // Reproducir el sonido de la carta
                     Given=true; // Marcar que la carta ha sido entregada
+                    player.animationIsDone = false;
+                    hoppyAnimator.SetTrigger("Return"); // Activar la animación de entrega de carta
+                    textBox.ShowTextBox(); // Activar el cuadro de texto
                 }
             }
         }

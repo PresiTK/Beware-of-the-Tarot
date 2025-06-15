@@ -10,14 +10,7 @@ public class TextCardNotFound : MonoBehaviour
     {
         text.SetActive(false);
     }
-    private void OnEnable()
-    {
-        Interaction.OnCardNotFound += ActivateText;
-    }
-    private void OnDisable()
-    {
-        Interaction.OnCardNotFound -= ActivateText;
-    }
+
     private void ActivateText(bool obj)
     {
         text.SetActive(obj);
