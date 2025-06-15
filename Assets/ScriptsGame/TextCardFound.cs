@@ -10,7 +10,14 @@ public class TextCardFound : MonoBehaviour
     {
         text.SetActive(false);
     }
-
+    private void OnEnable()
+    {
+        Interaction.OnCardFound += ActivateText;
+    }
+    private void OnDisable()
+    {
+        Interaction.OnCardFound -= ActivateText;
+    }
     private void ActivateText(bool obj)
     {
         text.SetActive(obj);

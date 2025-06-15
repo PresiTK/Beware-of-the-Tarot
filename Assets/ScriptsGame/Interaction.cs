@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
+    public static event Action<bool> OnCardNotFound;
+    public static event Action<bool> OnCardFound;
+
+
     [SerializeField] private GameObject image;
 
     [SerializeField] private float deactivateTime = 4.0f;
@@ -66,18 +70,25 @@ public class Interaction : MonoBehaviour
         textActive = true;
         currentTime = deactivateTime;
         player.isSearching = true;
+        OnCardFound?.Invoke(true);
+
     }
     private void DisplayText()
     {
         textActive = true;
         currentTime = deactivateTime;
         player.isSearching = true;
+        OnCardNotFound?.Invoke(true);
+
     }
     private void HideText()
     {
         player.isSearching = false;
         textActive = false;
         player.isSearching = false;
+        OnCardFound?.Invoke(false);
+        OnCardNotFound?.Invoke(false);
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
