@@ -11,6 +11,11 @@ public class CameraMovement : MonoBehaviour
 
     private Vector2 lastTargetPosition;
 
+    private float margin=6.8f;
+    [Header("Camera Limits")]
+    public float minX;
+    public float maxX;
+
     [Header("Parameters")]
     public bool isInRoom = true;
     public float speed;
@@ -28,10 +33,18 @@ public class CameraMovement : MonoBehaviour
 
     private void FollowTarget()
     {
-        if(target != null)
+        if (target != null)
         {
             lastTargetPosition.x = target.transform.position.x;
-            transform.position = Vector2.Lerp(transform.position, lastTargetPosition, speed * Time.deltaTime);
+
+            // Calcula nueva posición con interpolación
+            Vector2 targetPos = Vector2.Lerp(transform.position, lastTargetPosition, speed * Time.deltaTime);
+
+            // Limita la posición en X
+            targetPos.x = Mathf.Clamp(targetPos.x, minX, maxX);
+
+            // Aplica nueva posición
+            transform.position = targetPos;
         }
     }
 
@@ -44,6 +57,8 @@ public class CameraMovement : MonoBehaviour
         transform.position = newPosition;
         lastTargetPosition = newPosition;
         isInRoom = false;
+        minX = roomPosition.x - margin;
+        maxX = roomPosition.x + margin;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -56,15 +71,21 @@ public class CameraMovement : MonoBehaviour
                 {
                     TeleportToRoom(
                         new Vector2(
-                            roomPositionY.positionX, 
+                            roomPositionY.positionX,
                             roomPositionY.positionY
-                            )
-                       
-                        );
+                        )
+                    );
+
+                    float roomCenterX = roomPositionY.positionX;
+                    float halfWidth = (maxX - minX) / 2f;
+
+                    minX = roomCenterX - halfWidth;
+                    maxX = roomCenterX + halfWidth;
                 }
             }
         }
     }
+
 
 
 }
