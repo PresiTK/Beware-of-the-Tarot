@@ -11,7 +11,7 @@ public class CameraMovement : MonoBehaviour
 
     private Vector2 lastTargetPosition;
 
-    private float margin=6.8f;
+    public float margin=6.8f;
     [Header("Camera Limits")]
     public float minX;
     public float maxX;
