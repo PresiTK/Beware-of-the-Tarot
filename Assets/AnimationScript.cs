@@ -21,10 +21,13 @@ public class AnimationScript : MonoBehaviour
     public AudioClip[] audioClips;
 
     public TextMeshProUGUI textoTMP;
+    public TextMeshProUGUI Name;
+
     private int currentTextIndex = 0;
 
     public void Start()
     {
+        Name.text = "Hoppy ";
         textbox.SetActive(false);
         textboxSprite.sprite =spriteRenderers[0];
         audioSource.clip = audioClips[0];
@@ -58,6 +61,8 @@ public class AnimationScript : MonoBehaviour
         }
         else if (currentTextIndex == 1)
         {
+            Name.text = "??? ";
+
             textboxSprite.sprite = spriteRenderers[2];
             audioSource.clip = audioClips[2];
 
@@ -67,6 +72,8 @@ public class AnimationScript : MonoBehaviour
         }
         else if (currentTextIndex == 2)
         {
+            Name.text = "Matt ";
+
             hoppyAnimtor.SetTrigger("Started");
             textboxSprite.sprite = spriteRenderers[1];
             audioSource.clip = audioClips[1];
@@ -76,6 +83,8 @@ public class AnimationScript : MonoBehaviour
         }
         else if (currentTextIndex == 3)
         {
+            Name.text = "??? ";
+
             textboxSprite.sprite = spriteRenderers[2];
             audioSource.clip = audioClips[2];
 
@@ -85,6 +94,8 @@ public class AnimationScript : MonoBehaviour
         }
         else if (currentTextIndex == 4)
         {
+            Name.text = "Hoppy ";
+
             textboxSprite.sprite = spriteRenderers[0];
             audioSource.clip = audioClips[0];
 
@@ -94,6 +105,8 @@ public class AnimationScript : MonoBehaviour
         }
         else if (currentTextIndex == 5)
         {
+            Name.text = "Matt ";
+
             textboxSprite.sprite = spriteRenderers[1];
             audioSource.clip = audioClips[1];
 
@@ -102,6 +115,8 @@ public class AnimationScript : MonoBehaviour
         }
         else if (currentTextIndex == 6)
         {
+            Name.text = "??? ";
+
             textboxSprite.sprite = spriteRenderers[2];
             audioSource.clip = audioClips[2];
 
@@ -110,6 +125,8 @@ public class AnimationScript : MonoBehaviour
         }
         else if (currentTextIndex == 7)
         {
+            Name.text = "Matt ";
+
             textboxSprite.sprite = spriteRenderers[1];
             audioSource.clip = audioClips[1];
 

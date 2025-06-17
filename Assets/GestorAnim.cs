@@ -16,11 +16,14 @@ public class GestotAnim : MonoBehaviour
     public AudioClip[] audioClips;
 
     public TextMeshProUGUI textoTMP;
+    public TextMeshProUGUI Name;
+
     private int currentTextIndex = 0;
 
     public void Start()
         
     {
+        Name.text = "Matt ";
         textbox.SetActive(false);
         textboxSprite.sprite = spriteRenderers[1];
         audioSource.clip = audioClips[1];
@@ -49,6 +52,8 @@ public class GestotAnim : MonoBehaviour
     {
         if (currentTextIndex == 0)
         {
+            Name.text = "Hoppy ";
+
             textboxSprite.sprite = spriteRenderers[0];
             audioSource.clip = audioClips[0];
 
@@ -57,6 +62,8 @@ public class GestotAnim : MonoBehaviour
         }
         else if (currentTextIndex == 1)
         {
+            Name.text = "Matt ";
+
             textboxSprite.sprite = spriteRenderers[1];
             audioSource.clip = audioClips[1];
 
@@ -65,6 +72,8 @@ public class GestotAnim : MonoBehaviour
         }
         else if (currentTextIndex == 2)
         {
+            Name.text = "Hoppy ";
+
             textboxSprite.sprite = spriteRenderers[0];
             audioSource.clip = audioClips[0];
 
@@ -73,6 +82,8 @@ public class GestotAnim : MonoBehaviour
         }
         else if (currentTextIndex == 3)
         {
+            Name.text = "Matt ";
+
             textboxSprite.sprite = spriteRenderers[1];
             audioSource.clip = audioClips[1];
 
