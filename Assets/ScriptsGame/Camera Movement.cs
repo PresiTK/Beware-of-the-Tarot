@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class CameraMovement : MonoBehaviour
@@ -24,8 +25,20 @@ public class CameraMovement : MonoBehaviour
     {
         lastTargetPosition.x = target.transform.position.x;
         transform.position = target.transform.position;
-    }
 
+        string sceneName = SceneManager.GetActiveScene().name;
+        Debug.Log("Current Scene: " + sceneName);
+        if (sceneName == "GameScene")
+        {
+            minX = -7f;
+            maxX = 7f;
+        }
+        else if (sceneName == "Tutorial Scene")
+        {
+            minX = -57f;
+            maxX = -43f;
+        }
+    }
     private void FixedUpdate()
     {
         FollowTarget();

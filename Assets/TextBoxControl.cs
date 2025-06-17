@@ -14,7 +14,7 @@ public class TextBoxControl : MonoBehaviour
     public void Start()
     {
         TutorialMove.SetActive(false);
-        textoTMP.text = "Welcome to Beware of the Tarot Im Skully and Im here to Teach you How to play!\r\n\r\n(Press ENTER to Continue)..";
+        textoTMP.text = "Welcome to Beware of the Tarot! I'm Skully, and I'm here to teach you how to play!\r\n\r\n(Press ENTER to Continue)..";
         textbox.SetActive(true);
     }
     private void Update()
