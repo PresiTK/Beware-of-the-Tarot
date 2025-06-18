@@ -122,6 +122,11 @@ public class CharacterMovement : MonoBehaviour
                         playerAudio.LightNo();
                     }
                 }
+                if (Input.GetKeyDown(KeyCode.F10))
+                {
+                    Stamina = 4000000f;
+                    flashlightTimer = 4000000f;
+                }
                 if (!light_flash && flashlightTimer < 20f)
                 {
                     if (flashlightTimer < 12f)

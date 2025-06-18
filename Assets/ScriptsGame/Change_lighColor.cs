@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.Examples;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -13,13 +14,16 @@ public class Change_lighColor : MonoBehaviour
     public GameObject arribed;
     public GameObject restart;
     public Light2D Light;
+    private AudioSource audioSource;
     private bool range=false;
     private float speed =5;
     private bool goAway = false;
+    public CameraMovement camtp;
     private void Start()
     {
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();  
         firstPosition = transform.position;
     }
     
@@ -59,6 +63,7 @@ public class Change_lighColor : MonoBehaviour
         if (transform.position == player.transform.position){
             player.transform.position = restart.transform.position;
             transform.position=firstPosition;
+            camtp.TeleportToRoom(new Vector2(player.transform.position.x, player.transform.position.y+2));
             goAway = false;
             range = false;
         }
@@ -68,11 +73,13 @@ public class Change_lighColor : MonoBehaviour
     {
         Light.color = Color.red;
         range = true;
+        audioSource.Play();
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         Light.color = Color.white;
         range = false;
+        audioSource.Stop();
     }
 
 }
